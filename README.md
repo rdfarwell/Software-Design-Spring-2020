@@ -12,9 +12,9 @@ Helpful URLS directly relevant to SWD class
 - [ ] Icon               http://icon.uiowa.edu
 - [ ] WIKI Markdown      https://gitlab.com/gitlab-org/gitlab-ce/blob/6-4-stable/doc/markdown/markdown.md
 - [ ] Java Documentation https://docs.oracle.com/javase/search.html
-- [ ] Course Policies    https://uiowa.instructure.com/courses/105661/pages/course-policies
-- [ ] Example Portfolio  https://class-git.engineering.uiowa.edu/swd2019/swd2019/wikis/home
-- [ ] Example Files      https://class-git.engineering.uiowa.edu/swd2019/swd2019/tree/master/textbook\_examples
+- [ ] Course Policies    https://uiowa.instructure.com/courses/126130/pages/course-policies
+- [ ] Example Portfolio  https://class-git.engineering.uiowa.edu/swd2020/swd2020/wikis/home
+- [ ] Example Files      https://class-git.engineering.uiowa.edu/swd2020/swd2020/tree/master/textbook\_examples
 
 Fun :smile: links for in-depth understanding :thumbsup:
 --------
@@ -23,7 +23,7 @@ Fun :smile: links for in-depth understanding :thumbsup:
 - [ ] http://www.xkcd.com
 - [ ] http://stackoverflow.com
     - [ ] NO CHEATING:exclamation: Provide proper attribution
-    - [ ] See Course policies https://uiowa.instructure.com/courses/105661/pages/course-policies
+    - [ ] See Course policies https://uiowa.instructure.com/courses/126130/pages/course-policies
 
 
 Intended directory structure for the content in your repository
