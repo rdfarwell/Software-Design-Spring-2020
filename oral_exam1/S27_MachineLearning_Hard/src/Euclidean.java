@@ -19,7 +19,7 @@ public class Euclidean {
         int temp = 0;
 
         for (int i = 0; i < num1.length; i++) {
-            temp += ((num2[i] - num2[i]) * (num2[i] - num2[i]));
+            temp += ((num2[i] - num1[i]) * (num2[i] - num1[i]));
         }
 
         return Math.sqrt(temp);
