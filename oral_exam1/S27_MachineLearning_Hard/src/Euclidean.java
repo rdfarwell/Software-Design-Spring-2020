@@ -1,3 +1,7 @@
+/*
+ * Name: Dean Farwell
+ */
+
 import java.lang.Math;
 
 public class Euclidean {
