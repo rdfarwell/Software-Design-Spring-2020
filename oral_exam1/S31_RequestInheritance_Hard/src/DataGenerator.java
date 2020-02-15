@@ -80,7 +80,6 @@ class DataGenerator {
         return new Form(fields);
     }
 
-
     public String getRandIP() {
         return rand.nextInt(256) + "." + rand.nextInt(256) + "." + rand.nextInt(256) + "." + rand.nextInt(256);
     }
