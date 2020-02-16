@@ -8,4 +8,8 @@ public class Form {
         this.fields = fields;
     }
 
+    public HashMap<String, String> getFields() {
+        return fields;
+    }
+
 }

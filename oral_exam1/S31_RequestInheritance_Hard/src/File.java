@@ -7,4 +7,12 @@ public class File {
         this.type = type;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public String getType() {
+        return type;
+    }
+
 }

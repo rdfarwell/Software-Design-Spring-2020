@@ -13,12 +13,6 @@ public class GetRequest extends Request {
         numGet++;
     }
 
-    public GetRequest(UUID id) {
-        super(id);
-        this.url = "localhost:" + (((this.rand.nextInt(9) + 1) * 1000) + this.rand.nextInt(999)); // TODO: ok or how to call randURL
-        numGet++;
-    }
-
     @Override
     public String toString(Request req) {
         System.out.println(super.toString(req));

@@ -8,4 +8,16 @@ public class Video {
         this.name = name;
     }
 
+    public String getURL() {
+        return url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }
