@@ -51,7 +51,7 @@ public class Server {
         // print diagnostic info about each request in the stack
         while (!requestStack.isEmpty()) {
             Request req = requestStack.pop();
-            System.out.println(req.toString());
+            System.out.println(req.toString(req)); // TODO: ok or need help
             System.out.println();
         }
 

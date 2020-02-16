@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class GetVideoRequest extends Request {
+public class GetVideoRequest extends GetRequest {
 
     private Video video;
 

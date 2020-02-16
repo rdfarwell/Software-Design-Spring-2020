@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class GetFileRequest extends Request {
+public class GetFileRequest extends GetRequest {
 
     private File file;
 
