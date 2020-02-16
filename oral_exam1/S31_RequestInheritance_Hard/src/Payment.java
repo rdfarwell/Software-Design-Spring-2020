@@ -8,4 +8,16 @@ public class Payment {
         this.payment = payment;
         this.name2 = name2;
     }
+
+    public String getName1() {
+        return name1;
+    }
+
+    public String getName2() {
+        return name2;
+    }
+
+    public int getPayment() {
+        return payment;
+    }
 }

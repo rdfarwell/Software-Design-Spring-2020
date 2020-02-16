@@ -10,7 +10,6 @@ public class Request {
         numRequest++;
     }
 
-    //@Override
     public String toString(Request req) {
         System.out.println(req.toString()); // how to get memory address to appear
         System.out.print("UUID: " + uuid);
