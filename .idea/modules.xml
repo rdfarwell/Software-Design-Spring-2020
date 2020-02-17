@@ -54,6 +54,7 @@
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/supplemental/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/textbook_examples/supplemental/HelloWorld/HelloWorld.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/supplemental/JUnitExample/JUnitExample.iml" filepath="$PROJECT_DIR$/textbook_examples/supplemental/JUnitExample/JUnitExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" filepath="$PROJECT_DIR$/textbook_examples/MVCCalculatorExamples/MVCCalculatorExamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oral_exam1/S102_OneTimePad/S102_OneTimePad.iml" filepath="$PROJECT_DIR$/oral_exam1/S102_OneTimePad/S102_OneTimePad.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Hard/S27_MachineLearning_Hard.iml" filepath="$PROJECT_DIR$/oral_exam1/S27_MachineLearning_Hard/S27_MachineLearning_Hard.iml" />
       <module fileurl="file://$PROJECT_DIR$/oral_exam1/S31_RequestInheritance_Hard/S31_RequestInheritance_Hard.iml" filepath="$PROJECT_DIR$/oral_exam1/S31_RequestInheritance_Hard/S31_RequestInheritance_Hard.iml" />
       <module fileurl="file://$PROJECT_DIR$/textbook_examples/ch15/SerializationApps/SerializationApps.iml" filepath="$PROJECT_DIR$/textbook_examples/ch15/SerializationApps/SerializationApps.iml" />
