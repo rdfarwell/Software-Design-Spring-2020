@@ -33,4 +33,9 @@ class ArithmeticJUnitTest {
         assertTrue(Arithmetic.isPositive(i));
     }
 
+    @Test
+    void testZeroIsNotPositive() {
+        assertFalse(Arithmetic.isPositive(0));
+    }
+
 }
