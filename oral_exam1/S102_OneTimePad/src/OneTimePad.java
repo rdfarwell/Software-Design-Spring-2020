@@ -6,30 +6,31 @@ public class OneTimePad {
     public static void main(String[] argv) {
         Scanner scnr = new Scanner(System.in);
         String message, altMessage = "";
+        boolean changed = false;
         int key;
 
         message = scnr.nextLine();
         message = message.toUpperCase();
-        key = scnr.nextInt();
-
-        key = key % 26;
 
         for (int i = 0; i < message.length(); i++) {
             char alt = message.charAt(i);
+            changed = false;
 
-            if (alt == ' ') {
-                altMessage += " ";
-            }
-            else {
-                for (int x = 0; x < alphabet.length; x++) {
-                    if (alt == alphabet[x]) {
-                        if ((x + key) > 26) {
-                            altMessage = altMessage + alphabet[x + key - 26];
-                        } else {
-                            altMessage = altMessage + alphabet[x + key];
-                        }
+            for (int x = 0; x < alphabet.length; x++) {
+                if (alt == alphabet[x]) {
+                    key = scnr.nextInt() % 26;
+                    changed = true;
+                    if ((x + key) > 26) {
+                        altMessage = altMessage + alphabet[x + key - 26];
+                    }
+                    else {
+                        altMessage = altMessage + alphabet[x + key];
                     }
                 }
+            }
+
+            if (!changed) {
+                altMessage = altMessage + alt;
             }
         }
 
