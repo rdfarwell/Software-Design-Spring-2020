@@ -9,13 +9,14 @@ public class OneTimePad {
 
     public static void main(String[] argv) throws IOException {
         Scanner scnr = new Scanner(System.in);
-        String message, altMessage = "";
+        String keyFromFile = "", message = "", altMessage = "", keyToInt = "";
         boolean changed = false;
-        int key;
+        int key, keystart = -1, k = 0, n = 0;
+        int[] keyArray = new int[100];
         char[] readIn = new char[100];
         Arrays.fill(readIn, 'z');
 
-        FileReader file = null;
+        FileReader file = null; // create FileReader to read in key file
         try {
             file = new FileReader("oral_exam1/S102_OneTimePad/src/key.txt");
         }
@@ -23,14 +24,36 @@ public class OneTimePad {
             System.out.println("File not found");
         }
 
-        file.read(readIn);
+        file.read(readIn); // reads in an array of characters from the file
 
-        for (char c : readIn) {
+        for (char c : readIn) { // converts the characters into a string
             if(c != 'z') {
-                System.out.print(c);
+                keyFromFile = keyFromFile + c;
             }
         }
 
+        for (int a = 0; a < keyFromFile.length(); a++) {
+            if (keyFromFile.charAt(a) == ',' || keyFromFile.charAt(a) == '\n') {
+                try {
+                    if (keystart == -1) {
+                        keystart = Integer.parseInt(keyToInt.trim());
+                        keyToInt = "";
+                    }
+                    else {
+                        //System.out.println(keyToInt);
+                        keyArray[k] = Integer.parseInt(keyToInt.trim());
+                        keyToInt = "";
+                        k++;
+                    }
+                }
+                catch (NumberFormatException formatIssue) {
+                    System.out.println("Error converting keys in file to type int");
+                }
+            }
+            else {
+                keyToInt += keyFromFile.charAt(a);
+            }
+        }
 
         message = scnr.nextLine();
         message = message.toUpperCase();
@@ -41,7 +64,8 @@ public class OneTimePad {
 
             for (int x = 0; x < alphabet.length; x++) {
                 if (alt == alphabet[x]) {
-                    key = scnr.nextInt() % 26;
+                    key = keyArray[n] % 26;
+                    n++;
                     changed = true;
                     if ((x + key) > 26) {
                         altMessage = altMessage + alphabet[x + key - 26];
