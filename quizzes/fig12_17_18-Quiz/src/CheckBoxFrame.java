@@ -45,17 +45,25 @@ public class CheckBoxFrame extends JFrame {
             Font font = null; // stores the new Font
 
             // determine which CheckBoxes are checked and create Font
-            if (boldJCheckBox.isSelected() && italicJCheckBox.isSelected())
+            if (boldJCheckBox.isSelected() && italicJCheckBox.isSelected()) {
                 font = new Font("Serif", Font.BOLD + Font.ITALIC, 14);
-            else if (boldJCheckBox.isSelected())
+                font2 = new Font("Courier", Font.BOLD + Font.ITALIC, 14);
+            }
+            else if (boldJCheckBox.isSelected()) {
                 font = new Font("Serif", Font.BOLD, 14);
-            else if (italicJCheckBox.isSelected())
+                font2 = new Font("Courier", Font.BOLD, 14);
+            }
+            else if (italicJCheckBox.isSelected()) {
                 font = new Font("Serif", Font.ITALIC, 14);
-            else
+                font2 = new Font("Courier", Font.ITALIC, 14);
+            }
+            else {
                 font = new Font("Serif", Font.PLAIN, 14);
+                font2 = new Font("Courier", Font.PLAIN, 14);
+            }
 
             textField.setFont(font);
-            textField2.setFont(font);
+            textField2.setFont(font2);
         }
     }
 } // end class CheckBoxFrame
