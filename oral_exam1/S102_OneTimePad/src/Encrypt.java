@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Encrypt {
@@ -8,10 +9,15 @@ public class Encrypt {
         int n, key;
         int[] keyArray;
 
+        FileWriter encryptedFile = new FileWriter("oral_exam1/S102_OneTimePad/src/encryptedMessage.txt");
+
         ReadKeyFile reader = new ReadKeyFile(fileName);
+
 
         keyArray = reader.getKeyArray();
         n = reader.getKeyStart();
+
+        encryptedFile.write(n + "\n");
 
         for (int i = 0; i < message.length(); i++) {
             char alt = message.charAt(i);
@@ -37,8 +43,10 @@ public class Encrypt {
             }
         }
 
-
+        encryptedFile.write(altMessage);
 
         KeyGenerator.positionUpdate((n % reader.getLength()), keyArray, reader.getLength());
+
+        encryptedFile.close();
     }
 }

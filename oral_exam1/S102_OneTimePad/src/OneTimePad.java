@@ -11,7 +11,7 @@ public class OneTimePad {
     public static void main(String[] argv) throws IOException {
 
         Scanner scnr = new Scanner(System.in);
-        String message = "", fileLocation = "";
+        String message = "", keyFileLocation = "", messageFileLocation = "";
         int choice = 0;
 
         while (choice == 0) {
@@ -35,10 +35,19 @@ public class OneTimePad {
 
         else if (choice == 2) {
             System.out.println("Please enter the location of the key file:");
-            fileLocation = scnr.nextLine();
+            keyFileLocation = scnr.next();
             System.out.println("Please enter your message:");
-            message = scnr.nextLine();
-            Encrypt.encryptor(fileLocation, message);
+            message = scnr.next();
+            Encrypt.encryptor(keyFileLocation, message.toUpperCase());
+        }
+
+        else if (choice == 3) {
+            System.out.println("Please enter the location of the key file:");
+            keyFileLocation = scnr.next();
+            System.out.println("Please enter the location of the encrypted message file:");
+            messageFileLocation = scnr.next();
+            message = Decrypt.decryptor(keyFileLocation, messageFileLocation);
+            System.out.println("Decrypted Message: " + message);
         }
 
 
@@ -48,9 +57,8 @@ public class OneTimePad {
 
 
 
-
-        message = scnr.nextLine();
-        message = message.toUpperCase();
+        //message = scnr.nextLine();
+        //message = message.toUpperCase();
 
 
 
