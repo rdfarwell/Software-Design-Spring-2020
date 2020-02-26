@@ -29,12 +29,6 @@ public class Encrypt {
                     n++;
                     changed = true;
                     altMessage = altMessage + OneTimePad.alphabet[(x + key) % 26];
-//                    if ((x + key) > 26) {
-//                        altMessage = altMessage + OneTimePad.alphabet[x + key - 26];
-//                    }
-//                    else {
-//                        altMessage = altMessage + OneTimePad.alphabet[x + key];
-//                    }
                 }
             }
 

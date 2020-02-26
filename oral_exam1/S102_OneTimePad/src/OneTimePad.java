@@ -37,7 +37,7 @@ public class OneTimePad {
             System.out.println("Please enter the location of the key file:");
             keyFileLocation = scnr.next();
             System.out.println("Please enter your message:");
-            message = scnr.next();
+            message = scnr.next(); // TODO: Why this no work (next line skips, next doesn't allow for spaces
             Encrypt.encryptor(keyFileLocation, message.toUpperCase());
         }
 
@@ -49,22 +49,5 @@ public class OneTimePad {
             message = Decrypt.decryptor(keyFileLocation, messageFileLocation);
             System.out.println("Decrypted Message: " + message);
         }
-
-
-
-
-
-
-
-
-        //message = scnr.nextLine();
-        //message = message.toUpperCase();
-
-
-
-        //System.out.println(altMessage);
-
     }
-
-
 }
