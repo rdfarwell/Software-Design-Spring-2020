@@ -1,5 +1,5 @@
 public class ArabicToRoman {
-    public String aToR(int arabic) {
+    public static String aToR(int arabic) {
 
         String roman = "";
         int i = 0;

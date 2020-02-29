@@ -5,6 +5,18 @@ public class ArabicRomanConversion {
 
     public static void main(String[] args) {
 
+        System.out.println(ArabicToRoman.aToR(1));
+        System.out.println(ArabicToRoman.aToR(4));
+        System.out.println(ArabicToRoman.aToR(3));
+        System.out.println(ArabicToRoman.aToR(945));
+        System.out.println(ArabicToRoman.aToR(403));
+
+        System.out.println(RomanToArabic.rToA("I"));
+        System.out.println(RomanToArabic.rToA("IV"));
+        System.out.println(RomanToArabic.rToA("III"));
+        System.out.println(RomanToArabic.rToA("CMXLV"));
+        System.out.println(RomanToArabic.rToA("CDIII"));
+
     }
 
 }
