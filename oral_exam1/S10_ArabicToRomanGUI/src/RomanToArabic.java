@@ -38,4 +38,51 @@ public class RomanToArabic {
 
         return arabic;
     }
+
+    public static boolean romanCheck(String roman) {
+        int charCount = 0, repeatCount = 0;
+        char lastChar = ' ';
+        String[] doubles = {"CM", "CD", "XC", "XL", "IX", "IV"};
+        boolean check = true, specialCaseCheck = false;
+        roman = roman.toUpperCase();
+        for (int i = 0; i < roman.length(); i++) {
+            for (int x = 0; x < ArabicRomanConversion.romanLetters.length; x++) {
+                if (roman.charAt(i) == ArabicRomanConversion.romanLetters[x]) {
+                    if (roman.charAt(i) == lastChar) {
+                        repeatCount++;
+                    }
+                    else {
+                        repeatCount = 0;
+                    }
+
+                    if (repeatCount > 3) {
+                        check = false;
+                    }
+
+                    if (( i < roman.length() - 1) && (x == 2 || x == 4 || x == 6)) {
+                        for (int y = 0; y < doubles.length; y++) {
+                            if ((Character.toString(roman.charAt(i)) + roman.charAt(i + 1)).equals(doubles[y])) {
+                                specialCaseCheck = true;
+                            }
+                        }
+                        if (!specialCaseCheck) {
+                            check = false;
+                        }
+                        specialCaseCheck = false;
+                    }
+
+                    charCount++;
+                    lastChar = roman.charAt(i);
+
+                }
+            }
+        }
+
+        if (charCount != roman.length()) {
+            check = false;
+        }
+
+        return check;
+
+    }
 }

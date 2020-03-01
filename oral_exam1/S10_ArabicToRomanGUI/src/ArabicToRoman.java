@@ -16,4 +16,13 @@ public class ArabicToRoman {
 
         return roman;
     }
+
+    public static boolean arabicCheck(int arabic) {
+        if ((arabic >= 1) && (arabic <= 3999)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

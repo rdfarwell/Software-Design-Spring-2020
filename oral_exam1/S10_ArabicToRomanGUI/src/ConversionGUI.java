@@ -9,20 +9,20 @@ public class ConversionGUI extends JFrame {
     private final JTextField arabicEntry;
     private final JTextField romanEntry;
 
-    public ConversionGUI(int arabic, String roman) {
+    public ConversionGUI() {
         super("Roman and Arabic Numeral Conversion");
         setLayout(new FlowLayout());
 
         JLabel a = new JLabel("Please enter an integer between 1 and 3999");
         add(a);
 
-        arabicEntry = new JTextField(Integer.toString(arabic), 10);
+        arabicEntry = new JTextField(10);
         add(arabicEntry);
 
         JLabel r = new JLabel("Please enter a Valid Roman numeral");
         add(r);
 
-        romanEntry = new JTextField(roman, 10);
+        romanEntry = new JTextField(10);
         add(romanEntry);
 
         TextHandler handler = new TextHandler();
@@ -47,16 +47,24 @@ public class ConversionGUI extends JFrame {
             int out = 0;
             if (event.getSource() == arabicEntry) {
                 try {
-                    output = ArabicToRoman.aToR(Integer.parseInt(arabicEntry.getText()));
+                    out = Integer.parseInt(arabicEntry.getText());
+                } catch (NumberFormatException formatIssue) {
+                    romanEntry.setText("N");
                 }
-                catch (NumberFormatException formatIssue) {
-                    //System.out.println("Error converting keys in file to type int");
+                if (!ArabicToRoman.arabicCheck(out)) {
+                    romanEntry.setText("N");
                 }
-                romanEntry.setText(output);
+                else {
+                    romanEntry.setText(ArabicToRoman.aToR(out));
+                }
             }
             else if (event.getSource() == romanEntry) {
-                out = RomanToArabic.rToA(romanEntry.getText());
-                arabicEntry.setText(Integer.toString(out));
+                if (RomanToArabic.romanCheck(romanEntry.getText())) {
+                    arabicEntry.setText("N");
+                }
+                else {
+                    arabicEntry.setText(Integer.toString(RomanToArabic.rToA(romanEntry.getText())));
+                }
             }
         }
     }
