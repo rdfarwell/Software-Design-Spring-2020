@@ -6,12 +6,11 @@ import java.lang.Math;
 
 public class Euclidean {
 
-    private int[] num1 = new int[1000];
-    private int[] num2 = new int[1000];
+    private int[] num1;
+    private int[] num2;
 
     public Euclidean() {
-        num1[0] = 0;
-        num2[0] = 0;
+
     }
 
     public Euclidean(int[] n1, int[] n2) {
