@@ -13,16 +13,19 @@ public class ConversionGUI extends JFrame {
         super("Roman and Arabic Numeral Conversion");
         setLayout(new FlowLayout());
 
-        JLabel a = new JLabel("Please enter an integer between 1 and 3999");
+        JLabel inst = new JLabel("<html>Please enter an Arabic Numeral between 1 and 3999.<br>Please enter a valid Roman Numeral.<br>Invalid Entries will turn text boxes red and no output will display</html>");
+        add(inst);
+
+        JLabel a = new JLabel("Arabic Numeral");
         add(a);
 
-        arabicEntry = new JTextField(10);
+        arabicEntry = new JTextField(17);
         add(arabicEntry);
 
-        JLabel r = new JLabel("Please enter a Valid Roman numeral");
+        JLabel r = new JLabel("Roman Numeral");
         add(r);
 
-        romanEntry = new JTextField(10);
+        romanEntry = new JTextField(17);
         add(romanEntry);
 
         TextHandler handler = new TextHandler();
@@ -49,21 +52,31 @@ public class ConversionGUI extends JFrame {
                 try {
                     out = Integer.parseInt(arabicEntry.getText());
                 } catch (NumberFormatException formatIssue) {
-                    romanEntry.setText("N");
+                    romanEntry.setText("");
+                    arabicEntry.setBackground(Color.red);
+                    romanEntry.setBackground(Color.red);
                 }
                 if (!ArabicToRoman.arabicCheck(out)) {
-                    romanEntry.setText("N");
+                    romanEntry.setText("");
+                    arabicEntry.setBackground(Color.red);
+                    romanEntry.setBackground(Color.red);
                 }
                 else {
                     romanEntry.setText(ArabicToRoman.aToR(out));
+                    arabicEntry.setBackground(Color.white);
+                    romanEntry.setBackground(Color.white);
                 }
             }
             else if (event.getSource() == romanEntry) {
-                if (RomanToArabic.romanCheck(romanEntry.getText())) {
-                    arabicEntry.setText("N");
+                if (!RomanToArabic.romanCheck(romanEntry.getText())) {
+                    arabicEntry.setText("");
+                    arabicEntry.setBackground(Color.red);
+                    romanEntry.setBackground(Color.red);
                 }
                 else {
                     arabicEntry.setText(Integer.toString(RomanToArabic.rToA(romanEntry.getText())));
+                    arabicEntry.setBackground(Color.white);
+                    romanEntry.setBackground(Color.white);
                 }
             }
         }
