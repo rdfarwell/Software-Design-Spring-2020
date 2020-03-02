@@ -1,35 +1,17 @@
-/*
- * Name: Dean Farwell
- */
-
 import java.lang.Math;
 
 public class Euclidean {
-
-    private int[] num1;
-    private int[] num2;
-
-    public Euclidean() {
-
-    }
-
-    public Euclidean(int[] n1, int[] n2) {
-        num1 = n1;
-        num2 = n2;
-    }
-
-    private double euclideanCalc() {
+    public static double euclideanDistance(int[] num1, int[] num2) {
         int temp = 0;
 
-        for (int i = 0; i < num1.length; i++) {
-            temp += ((num2[i] - num1[i]) * (num2[i] - num1[i]));
+        if (num1.length == num2.length) {
+            for (int i = 0; i < num1.length; i++) {
+                temp += ((num2[i] - num1[i]) * (num2[i] - num1[i]));
+            }
+            return Math.sqrt(temp);
         }
-
-        return Math.sqrt(temp);
+        else {
+            return -1;
+        }
     }
-
-    public void printEuclidean() {
-        System.out.println("Euclidean distance between " + num1 + " and " + num2 + " = " + euclideanCalc());
-    }
-
 }
