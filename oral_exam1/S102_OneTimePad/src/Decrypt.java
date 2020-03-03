@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 /**
  * This class contains the method for decrypting a message file
+ *
+ * @author Dean Farwell
  */
 public class Decrypt {
 

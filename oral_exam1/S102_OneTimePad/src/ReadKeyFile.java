@@ -32,8 +32,8 @@ public class ReadKeyFile {
     }
 
     /**
-     *
-     * @return
+     * Getter for the length of the array as it is not set dynamically
+     * @return Length of the array
      */
     public int getLength() {
         return length;
