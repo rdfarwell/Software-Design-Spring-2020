@@ -3,7 +3,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ *
+ */
 public class Decrypt {
+
+    /**
+     * Decryption method that handles opeing the
+     * @param keyFile Key file location given by user
+     * @param messageFile Message file location given by user
+     * @return String The decrypted message
+     * @throws IOException Thrown if there are issues opening the given files
+     */
     public static String decryptor(String keyFile, String messageFile) throws IOException {
         boolean changed;
         String message = "", messageFromFile = "", encryptedMessage = "";
@@ -50,12 +61,12 @@ public class Decrypt {
             char alt = encryptedMessage.charAt(i);
             changed = false;
 
-            for (int x = 0; x < OneTimePad.alphabet.length; x++) {
-                if (alt == OneTimePad.alphabet[x]) {
+            for (int x = 0; x < OneTimePad.ALPHABET.length; x++) {
+                if (alt == OneTimePad.ALPHABET[x]) {
                     key = (keys.getKeyArray()[(n % keys.getLength())] % 26);
                     n++;
                     changed = true;
-                    message = message + OneTimePad.alphabet[(x - key + 26) % 26];
+                    message = message + OneTimePad.ALPHABET[(x - key + 26) % 26];
                 }
             }
 

@@ -23,12 +23,12 @@ public class Encrypt {
             char alt = message.charAt(i);
             changed = false;
 
-            for (int x = 0; x < OneTimePad.alphabet.length; x++) {
-                if (alt == OneTimePad.alphabet[x]) {
+            for (int x = 0; x < OneTimePad.ALPHABET.length; x++) {
+                if (alt == OneTimePad.ALPHABET[x]) {
                     key = keyArray[(n % reader.getLength())];
                     n++;
                     changed = true;
-                    altMessage = altMessage + OneTimePad.alphabet[(x + key) % 26];
+                    altMessage = altMessage + OneTimePad.ALPHABET[(x + key) % 26];
                 }
             }
 
