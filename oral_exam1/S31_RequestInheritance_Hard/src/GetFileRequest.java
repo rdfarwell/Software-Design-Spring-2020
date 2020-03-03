@@ -6,7 +6,7 @@ public class GetFileRequest extends GetRequest {
     private static int numFile;
 
     public GetFileRequest(UUID id, File file) {
-        super(id, ("file://" + file.getPath()));
+        super(id, ("file://" + file.getPath() + file.getType()));
         this.file = file;
         numFile++;
     }
