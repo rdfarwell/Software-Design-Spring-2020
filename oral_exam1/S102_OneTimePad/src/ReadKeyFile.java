@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
+ * This class creates an object that contains all necessary things from the key file.
+ * The objects created by this class are constructed with with a key text file and uses that to get the key array,
+ * starting key, and length
  *
+ * @author Dean Farwell
  */
 public class ReadKeyFile {
     private int[] keyArray = new int[100];
