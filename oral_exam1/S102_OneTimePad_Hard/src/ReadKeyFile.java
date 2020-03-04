@@ -11,8 +11,20 @@ import java.util.Arrays;
  * @author Dean Farwell
  */
 public class ReadKeyFile {
-    private int[] keyArray = new int[100];
+
+    /**
+     * Stores an array of key values from the file
+     */
+    private int[] keyArray = new int[1000];
+
+    /**
+     * The starting position given within the first line of the file
+     */
     private int keyStart = -1;
+
+    /**
+     * The number of keys in the array since the array is not dynamically created
+     */
     private int length = 0;
 
     /**

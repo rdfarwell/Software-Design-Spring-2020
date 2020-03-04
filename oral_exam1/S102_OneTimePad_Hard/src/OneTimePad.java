@@ -10,6 +10,9 @@ import java.util.Scanner;
  * @since 2020-02-16
  */
 public class OneTimePad {
+    /**
+     * Character array of an all caps alphabet used by the encryptor and decryptor
+     */
     public static final char[] ALPHABET = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
     /**
