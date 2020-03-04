@@ -1,8 +1,11 @@
-//package ;
-
 import java.util.Random;
 import java.util.Stack;
 
+/**
+ * Main Class that creates and tests a multitude of classes that are inherited from each other
+ *
+ * @author Dean Farwell
+ */
 public class Server {
     private static final Integer NUM_REQ_TYPES = 9;
 
