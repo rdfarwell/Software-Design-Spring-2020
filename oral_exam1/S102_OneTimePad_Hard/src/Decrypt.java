@@ -69,7 +69,7 @@ public class Decrypt {
                     key = (keys.getKeyArray()[(n % keys.getLength())] % 26); // grabs the necessary key
                     n++;
                     changed = true;
-                    message = message + OneTimePad.ALPHABET[(x - key + 26000) % 26]; // transforms back to original. +26000 and % 26 is to avoid negative numbers when subtracting
+                    message = message + OneTimePad.ALPHABET[(x - key + 26) % 26]; // transforms back to original. +26 and % 26 is to avoid negative numbers when subtracting
                 }
             }
 

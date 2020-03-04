@@ -77,8 +77,8 @@ public class ReadKeyFile {
                         keyArray[k] = Integer.parseInt(keyToInt.trim());
                         keyToInt = ""; // resets the key save string as the current key has been saved and a new one must be constructed
                         k++;
-                        length++;
                     }
+                    length++;
                 }
                 catch (NumberFormatException formatIssue) { // catches any issues with the keys not being a number
                     System.out.println("Error converting keys in file to type int");

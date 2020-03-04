@@ -21,13 +21,14 @@ public class OneTimePad {
 
         Scanner scnr = new Scanner(System.in);
         String message = "", keyFileLocation = "", messageFileLocation = "";
-        int choice = 0;
+        int choice = 0, input = 0;
 
         while (choice == 0) { // menu for user to select what they want to do, loops until a valid choice is selected
             System.out.println("Encryption Program, Please choose an option");
             System.out.println("1: Generate new key file");
             System.out.println("2: Encrypt a message");
             System.out.println("3: Decrypt a message");
+            System.out.println("4: Exit");
 
             try { // uses String (nextLine) casted to Integer to avoid a  bug found when not taking in all end-line characters
                 choice = Integer.parseInt(scnr.nextLine());
@@ -35,32 +36,43 @@ public class OneTimePad {
             catch (NumberFormatException notInt) { // if the entry isn't an int, it just sets choice to zero
                 choice = 0;
             }
-            if (choice != 1 && choice != 2 && choice != 3) { // if the entry isn't one of the three options, set to 0 (loop condition)
+
+            if (choice == 1) { //generate key file
+                System.out.println("Please enter an integer for the number of keys you would like:");
+                try { // uses String (nextLine) casted to Integer to avoid a  bug found when not taking in all end-line characters
+                    input = Integer.parseInt(scnr.nextLine());
+                    KeyGenerator.generator(input);
+                }
+                catch (NumberFormatException notInt) { // if the entry isn't an int, it just sets choice to zero
+                    System.out.println("Not an Integer");
+                }
+                choice = 0;
+            }
+
+            else if (choice == 2) { // encrypt
+                System.out.println("Please enter the location of the key file:");
+                keyFileLocation = scnr.nextLine();
+                System.out.println("Please enter your message:");
+                message = scnr.nextLine();
+                Encrypt.encryptor(keyFileLocation, message.toUpperCase());
+                choice = 0;
+            }
+
+            else if (choice == 3) { // decrypt
+                System.out.println("Please enter the location of the key file:");
+                keyFileLocation = scnr.nextLine();
+                System.out.println("Please enter the location of the encrypted message file:");
+                messageFileLocation = scnr.nextLine();
+                message = Decrypt.decryptor(keyFileLocation, messageFileLocation);
+                System.out.println("Decrypted Message: " + message);
+                choice = 0;
+            }
+
+            else if (choice != 4) { // if the entry isn't one of the three options, set to 0 (loop condition)
                 choice = 0;
             }
         }
 
-        if (choice == 1) { //generate key file
-            System.out.println("Please enter an integer for the number of keys you would like:");
-            System.out.println("Please enter the max of the range you would like your keys to fall between:");
-            KeyGenerator.generator(scnr.nextInt(), scnr.nextInt());
-        }
 
-        else if (choice == 2) { // encrypt
-            System.out.println("Please enter the location of the key file:");
-            keyFileLocation = scnr.nextLine();
-            System.out.println("Please enter your message:");
-            message = scnr.nextLine();
-            Encrypt.encryptor(keyFileLocation, message.toUpperCase());
-        }
-
-        else if (choice == 3) { // decrypt
-            System.out.println("Please enter the location of the key file:");
-            keyFileLocation = scnr.next();
-            System.out.println("Please enter the location of the encrypted message file:");
-            messageFileLocation = scnr.next();
-            message = Decrypt.decryptor(keyFileLocation, messageFileLocation);
-            System.out.println("Decrypted Message: " + message);
-        }
     }
 }

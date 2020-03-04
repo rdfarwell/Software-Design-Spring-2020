@@ -23,7 +23,7 @@ public class Encrypt {
         int[] keyArray;
 
         // creates the file where the encrypted message will be written
-        FileWriter encryptedFile = new FileWriter("oral_exam1/S102_OneTimePad/src/encryptedMessage.txt");
+        FileWriter encryptedFile = new FileWriter("oral_exam1/S102_OneTimePad_Hard/src/encryptedMessage.txt");
 
         // sends the key file to the key reader to get the key array and starting position
         ReadKeyFile reader = new ReadKeyFile(fileName);
