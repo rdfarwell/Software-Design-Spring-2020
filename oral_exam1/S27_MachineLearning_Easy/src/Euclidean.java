@@ -16,7 +16,7 @@ public class Euclidean {
 
         if (num1.length == num2.length) { // length check
             for (int i = 0; i < num1.length; i++) { // sums the relevant calculation
-                temp += (num2[i] - num1[i]);
+                temp += (num2[i] - num1[i]) * (num2[i] - num1[i]);
             }
             return Math.sqrt(temp);
         }
