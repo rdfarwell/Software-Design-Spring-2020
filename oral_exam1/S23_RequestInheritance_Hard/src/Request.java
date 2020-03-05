@@ -11,7 +11,8 @@ public class Request {
     }
 
     public String toString(Request req) {
-        System.out.println(req.toString()); // how to get memory address to appear
+        System.out.println("RequestInheritance." + super.toString());
+        //System.out.println(req.toString()); // how to get memory address to appear
         System.out.print("UUID: " + uuid);
         return "";
     }

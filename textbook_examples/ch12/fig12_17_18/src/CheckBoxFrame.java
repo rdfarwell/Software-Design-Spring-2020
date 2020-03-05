@@ -8,6 +8,7 @@ import java.awt.event.ItemListener;
 
 public class CheckBoxFrame extends JFrame {
     private final JTextField textField; // displays text in changing fonts
+    private final JTextField textField2;
     private final JCheckBox boldJCheckBox; // to select/deselect bold
     private final JCheckBox italicJCheckBox; // to select/deselect italic
 
@@ -20,6 +21,10 @@ public class CheckBoxFrame extends JFrame {
         textField = new JTextField("Watch the font style change", 20);
         textField.setFont(new Font("Serif", Font.PLAIN, 14));
         add(textField); // add textField to JFrame
+
+        textField2 = new JTextField("Watch the font style change", 20);
+        textField2.setFont(new Font("Courier", Font.PLAIN, 14));
+        add(textField2); // add textField to JFrame
 
         boldJCheckBox = new JCheckBox("Bold");
         italicJCheckBox = new JCheckBox("Italic");
@@ -50,6 +55,7 @@ public class CheckBoxFrame extends JFrame {
                 font = new Font("Serif", Font.PLAIN, 14);
 
             textField.setFont(font);
+            textField2.setFont(font);
         }
     }
 } // end class CheckBoxFrame
