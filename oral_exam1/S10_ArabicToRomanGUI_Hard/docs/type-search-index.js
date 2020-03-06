@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"ArabicRomanConversion"},{"p":"<Unnamed>","l":"ArabicToRoman"},{"p":"<Unnamed>","l":"ConversionGUI"},{"p":"<Unnamed>","l":"RomanToArabic"},{"p":"<Unnamed>","l":"ConversionGUI.TextHandler"}]
