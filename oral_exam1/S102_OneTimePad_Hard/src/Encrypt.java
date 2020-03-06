@@ -22,6 +22,8 @@ public class Encrypt {
         int n, key;
         int[] keyArray;
 
+        fileName = "oral_exam1/S102_OneTimePad_Hard/src/" + fileName;
+
         // creates the file where the encrypted message will be written
         FileWriter encryptedFile = new FileWriter("oral_exam1/S102_OneTimePad_Hard/src/encryptedMessage.txt");
 

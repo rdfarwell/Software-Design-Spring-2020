@@ -25,6 +25,9 @@ public class Decrypt {
         char[] encryptedFile = new char[100];
         Arrays.fill(encryptedFile, 'z');
 
+        keyFile = "oral_exam1/S102_OneTimePad_Hard/src/" + keyFile;
+        messageFile = "oral_exam1/S102_OneTimePad_Hard/src/" + messageFile;
+
         ReadKeyFile keys = new ReadKeyFile(keyFile);
         FileReader altMessage = null; // create FileReader to read in message file
 
