@@ -30,7 +30,7 @@ public class ArabicRomanConversion {
 
         ConversionGUI gui = new ConversionGUI();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(400, 150);
+        gui.setSize(450, 150);
         gui.setVisible(true);
 
     }

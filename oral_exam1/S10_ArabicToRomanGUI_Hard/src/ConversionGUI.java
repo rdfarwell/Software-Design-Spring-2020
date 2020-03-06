@@ -33,13 +33,13 @@ public class ConversionGUI extends JFrame {
         JLabel a = new JLabel("Arabic Numeral");
         add(a);
 
-        arabicEntry = new JTextField(17);
+        arabicEntry = new JTextField(25);
         add(arabicEntry);
 
         JLabel r = new JLabel("Roman Numeral");
         add(r);
 
-        romanEntry = new JTextField(17);
+        romanEntry = new JTextField(25);
         add(romanEntry);
 
         TextHandler handler = new TextHandler(); // add key listener to the two text boxes

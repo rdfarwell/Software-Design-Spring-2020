@@ -57,76 +57,137 @@ public class RomanToArabic {
      */
     public static boolean romanCheck(String roman) {
 
-        boolean valid = false;
-        int i = 0;
+        boolean mDone = false, dDone = false, cDone = false, lDone = false, xDone = false, vDone = false, iDone = false;
+        int charCount = 0, mCount = 0, dCount = 0, cCount = 0, lCount = 0, xCount = 0, vCount = 0, iCount = 0;
+        String tempRoman;
 
         roman = roman.toUpperCase();
+        tempRoman = roman;
 
-        return roman.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
-
-//        for (int x = 0; x < ArabicRomanConversion.ROMAN_LETTERS.length; x++) {
-//            if (roman.charAt(i) ==
-//        }
-
-        /*
-        int charCount = 0, repeatCount = 1, currentCharIndex;
-        char lastChar = ' ';
-        String[] doubles = {"CM", "CD", "XC", "XL", "IX", "IV", "MM", "CC", "XX", "II"};
-        boolean check = true, specialCaseCheck = false;
-        roman = roman.toUpperCase();
-        for (int i = 0; i < roman.length(); i++) {
-            for (int x = 0; x < ArabicRomanConversion.romanLetters.length; x++) {
-                if (roman.charAt(i) == ArabicRomanConversion.romanLetters[x]) {
-                    currentCharIndex = x;
-                    if (roman.charAt(i) == lastChar) {
-                        repeatCount++;
-                    }
-                    else {
-                        repeatCount = 1;
-                    }
-
-                    if (repeatCount > 3) {
-                        check = false;
-                    }
-
-                    if (( i < roman.length() - 1)) {
-                        if (x == 2 || x == 4 || x == 6) {
-                            for (int y = 0; y < doubles.length; y++) {
-                                if ((Character.toString(roman.charAt(i)) + roman.charAt(i + 1)).equals(doubles[y])) {
-                                    specialCaseCheck = true;
-                                }
-                            }
-                        }
-                        if (!specialCaseCheck) {
-                            specialCaseCheck = true;
-                            for (int t = 0; t < currentCharIndex + 1; t++) {
-                                if (roman.charAt(i + 1) == ArabicRomanConversion.romanLetters[t]) { // check for higher index than earlier for casses like iiv
-                                    specialCaseCheck = false;
-                                }
-                            }
-                        }
-                        if (!specialCaseCheck) {
-                            check = false;
-                        }
-                        specialCaseCheck = false;
-                    }
-
+        for (int y = 0; y < roman.length(); y++) {
+            for (int x = 0; x < ArabicRomanConversion.ROMAN_LETTERS.length; x++) {
+                if (roman.charAt(y) == ArabicRomanConversion.ROMAN_LETTERS[x]) {
                     charCount++;
-                    lastChar = roman.charAt(i);
-
                 }
             }
         }
 
         if (charCount != roman.length()) {
-            check = false;
+            return false;
         }
 
-        //if (!roman.equals())
+        while (!tempRoman.equals("")) {
+            if (tempRoman.charAt(0) == 'M') {
+                if (mDone || mCount > 3) {
+                    return false;
+                }
+                else {
+                    mCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+            }
+            else if (tempRoman.charAt(0) == 'D') {
+                if (dDone || dCount > 1) {
+                    return false;
+                }
+                else {
+                    dCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+            }
+            else if (tempRoman.charAt(0) == 'C') {
+                if (cDone || cCount > 3) {
+                    return false;
+                }
+                else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'M' || tempRoman.charAt(1) == 'D')) {
+                    if (cCount > 0) {
+                        return false;
+                    }
+                    cDone = true;
+                    tempRoman = tempRoman.substring(2);
+                }
+                else {
+                    cCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+                dDone = true;
+            }
+            else if (tempRoman.charAt(0) == 'L') {
+                if (lDone || lCount > 1) {
+                    return false;
+                }
+                else {
+                    lCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+                dDone = true;
+                cDone = true;
+            }
+            else if (tempRoman.charAt(0) == 'X') {
+                if (xDone || xCount > 3) {
+                    return false;
+                }
+                else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'C' || tempRoman.charAt(1) == 'L')) {
+                    if (xCount > 0) {
+                        return false;
+                    }
+                    xDone = true;
+                    tempRoman = tempRoman.substring(2);
+                }
+                else {
+                    xCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+                dDone = true;
+                cDone = true;
+                lDone = true;
+            }
+            else if (tempRoman.charAt(0) == 'V') {
+                if (vDone || vCount > 1) {
+                    return false;
+                }
+                else {
+                    vCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+                dDone = true;
+                cDone = true;
+                lDone = true;
+                xDone = true;
+            }
+            else if (tempRoman.charAt(0) == 'I') {
+                if (iDone || iCount > 3) {
+                    return false;
+                }
+                else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'X' || tempRoman.charAt(1) == 'V')) {
+                    if (iCount > 0) {
+                        return false;
+                    }
+                    iDone = true;
+                    tempRoman = tempRoman.substring(2);
+                }
+                else {
+                    iCount++;
+                    tempRoman = tempRoman.substring(1);
+                }
+                mDone = true;
+                dDone = true;
+                cDone = true;
+                lDone = true;
+                xDone = true;
+                vDone = true;
+            }
+        }
 
-        return check;
+        if (mCount > 3 || dCount > 1 || cCount > 3 || lCount > 1 || xCount > 3 || vCount > 1 || iCount > 3) {
+            return false;
+        }
 
-
-         */
+        return true;
     }
 }
