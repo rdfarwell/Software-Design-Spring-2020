@@ -1,23 +1,58 @@
+/**
+ * Data type Payment that includes a sender, receiver, and a payment amount
+ *
+ * @author Dean Farwell
+ */
 public class Payment {
 
-    private String name1, name2;
-    private int payment;
+    /**
+     * Name of the sender of the payment
+     */
+    private String sender;
 
-    public Payment(String name1, int payment, String name2) {
-        this.name1 = name1;
-        this.payment = payment;
-        this.name2 = name2;
+    /**
+     * Name of the receiver of the payment
+     */
+    private String receiver;
+
+    /**
+     * Total amount sent in payment
+     */
+    private int amount;
+
+    /**
+     * Constructor that initializes the payment's sender, receiver, and amount
+     * @param sender Name of the sender of the payment
+     * @param amount Total amount sent in the payment
+     * @param receiver Name of the receiver of the payment
+     */
+    public Payment(String sender, int amount, String receiver) {
+        this.sender = sender;
+        this.amount = amount;
+        this.receiver = receiver;
     }
 
-    public String getName1() {
-        return name1;
+    /**
+     * Getter for sender of the payment
+     * @return Sender of the payment
+     */
+    public String getSender() {
+        return sender;
     }
 
-    public String getName2() {
-        return name2;
+    /**
+     * Getter for the receiver of the payment
+     * @return Receiver of the payment
+     */
+    public String getReceiver() {
+        return receiver;
     }
 
-    public int getPayment() {
-        return payment;
+    /**
+     * Getter for the amount of the payment
+     * @return Amount of the payment
+     */
+    public int getAmount() {
+        return amount;
     }
 }

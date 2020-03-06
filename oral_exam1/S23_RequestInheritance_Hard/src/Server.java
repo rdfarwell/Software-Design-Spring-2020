@@ -4,11 +4,19 @@ import java.util.Stack;
 /**
  * Main Class that creates and tests a multitude of classes that are inherited from each other
  *
- * @author Dean Farwell
+ * @author Given Class
  */
 public class Server {
+
+    /**
+     * Total number of request types
+     */
     private static final Integer NUM_REQ_TYPES = 9;
 
+    /**
+     * Main method that calls each object class to create an object and displays it in order to test it
+     * @param argv Standard for all Java main methods
+     */
     public static void main(String argv[]) {
         Stack<Request> requestStack = new Stack<>();
         Random random = new Random();
@@ -54,7 +62,7 @@ public class Server {
         // print diagnostic info about each request in the stack
         while (!requestStack.isEmpty()) {
             Request req = requestStack.pop();
-            System.out.println(req.toString(req)); // TODO: ok or need help
+            System.out.println(req.toString());
             System.out.println();
         }
 
