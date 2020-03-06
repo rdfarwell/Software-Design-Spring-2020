@@ -64,7 +64,7 @@ public class RomanToArabic {
         roman = roman.toUpperCase();
         tempRoman = roman;
 
-        for (int y = 0; y < roman.length(); y++) {
+        for (int y = 0; y < roman.length(); y++) { // makes sure all characters are valid roman numerals
             for (int x = 0; x < ArabicRomanConversion.ROMAN_LETTERS.length; x++) {
                 if (roman.charAt(y) == ArabicRomanConversion.ROMAN_LETTERS[x]) {
                     charCount++;
@@ -76,9 +76,15 @@ public class RomanToArabic {
             return false;
         }
 
+        /*
+         * Comparison portion that follows the rules of roman numerals, there can only be a maximum of three
+         * characters in a row and total (except special cases). Once a lower number is used, higher numbers can not
+         * be used unless it is a special case. If there is a special case of a number, there can be no other instances
+         * of the proceeding numeral. Long but it works
+         */
         while (!tempRoman.equals("")) {
             if (tempRoman.charAt(0) == 'M') {
-                if (mDone || mCount > 3) {
+                if (mDone) {
                     return false;
                 }
                 else {
@@ -87,7 +93,7 @@ public class RomanToArabic {
                 }
             }
             else if (tempRoman.charAt(0) == 'D') {
-                if (dDone || dCount > 1) {
+                if (dDone) {
                     return false;
                 }
                 else {
@@ -97,7 +103,7 @@ public class RomanToArabic {
                 mDone = true;
             }
             else if (tempRoman.charAt(0) == 'C') {
-                if (cDone || cCount > 3) {
+                if (cDone) {
                     return false;
                 }
                 else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'M' || tempRoman.charAt(1) == 'D')) {
@@ -115,7 +121,7 @@ public class RomanToArabic {
                 dDone = true;
             }
             else if (tempRoman.charAt(0) == 'L') {
-                if (lDone || lCount > 1) {
+                if (lDone) {
                     return false;
                 }
                 else {
@@ -127,7 +133,7 @@ public class RomanToArabic {
                 cDone = true;
             }
             else if (tempRoman.charAt(0) == 'X') {
-                if (xDone || xCount > 3) {
+                if (xDone) {
                     return false;
                 }
                 else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'C' || tempRoman.charAt(1) == 'L')) {
@@ -147,7 +153,7 @@ public class RomanToArabic {
                 lDone = true;
             }
             else if (tempRoman.charAt(0) == 'V') {
-                if (vDone || vCount > 1) {
+                if (vDone) {
                     return false;
                 }
                 else {
@@ -161,7 +167,7 @@ public class RomanToArabic {
                 xDone = true;
             }
             else if (tempRoman.charAt(0) == 'I') {
-                if (iDone || iCount > 3) {
+                if (iDone) {
                     return false;
                 }
                 else if ((tempRoman.length() > 1) && (tempRoman.charAt(1) == 'X' || tempRoman.charAt(1) == 'V')) {
