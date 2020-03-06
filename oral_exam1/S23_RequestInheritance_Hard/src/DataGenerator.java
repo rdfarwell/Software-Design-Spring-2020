@@ -1,20 +1,52 @@
-//package src;
-
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
+/**
+ * Class that randomly creates various data for use in Server
+ *
+ * @author Given Class
+ */
 class DataGenerator {
-    // fields to hold example data
+
+    /**
+     * Random instance to create random numbers
+     */
     private Random rand;
+
+    /**
+     * An array of names
+     */
     private String[] names;
+
+    /**
+     * An array of encryption methods
+     */
     private String[] encryption;
+
+    /**
+     * An array of video titles
+     */
     private String[] videoTitles;
+
+    /**
+     * An array of file paths
+     */
     private String[] filePaths;
+
+    /**
+     * An array of file types
+     */
     private String[] fileTypes;
+
+    /**
+     * An array of colors
+     */
     private String[] colors;
 
-    // Constructor
+    /**
+     * Constructor for DataGenerator that initializes all of the private variables with various strings
+     */
     DataGenerator() {
         // initialize with example data
         this.rand = new Random();
@@ -26,52 +58,98 @@ class DataGenerator {
         this.colors = new String[]{"red", "orange", "yellow", "green", "blue", "indigo", "violet", "egg shell"};
     }
 
-    // private utilities for data generation
+    /**
+     * Pulls a random name
+     * @return A random name
+     */
     private String getRandName() {
         return this.names[this.rand.nextInt(this.names.length)];
     }
 
+    /**
+     * Pulls a random color
+     * @return A random color
+     */
     private String getRandColor() {
         return this.colors[this.rand.nextInt(this.colors.length)];
     }
 
+    /**
+     * Pulls a random video title
+     * @return A random video title
+     */
     private String getRandVideoTitle() {
         return this.videoTitles[this.rand.nextInt(this.videoTitles.length)];
     }
 
+    /**
+     * Pulls a random file type
+     * @return A random file type
+     */
     private String getRandFileType() {
         return this.fileTypes[this.rand.nextInt(this.fileTypes.length)];
     }
 
+    /**
+     * Pulls a random file path
+     * @return A random file path
+     */
     private String getRandFilePath() {
         return this.filePaths[this.rand.nextInt(this.filePaths.length)];
     }
 
-    // public data generation tools
+    /**
+     * Creates a random URL
+     * @return A random URL
+     */
     public String getRandURL() {
         return "localhost:" + (((this.rand.nextInt(9) + 1) * 1000) + this.rand.nextInt(999));
     }
 
+    /**
+     * Creates a random payment amount
+     * @return A random payment amount
+     */
     public Payment getRandPayment() {
         return new Payment(this.getRandName(), this.rand.nextInt(10000), this.getRandName());
     }
 
+    /**
+     * Creates a random UUID
+     * @return A random UUID
+     */
     public UUID getRandUUID() {
         return UUID.randomUUID();
     }
 
+    /**
+     * Pulls a random encryption scheme
+     * @return A random encryption scheme
+     */
     public String getRandEncryptionScheme() {
         return this.encryption[this.rand.nextInt(this.encryption.length)];
     }
 
+    /**
+     * Creates a random video
+     * @return A random video
+     */
     public Video getRandVideo() {
         return new Video(this.getRandURL(), this.getRandVideoTitle(), this.getRandName());
     }
 
+    /**
+     * Creates a random file
+     * @return A random file
+     */
     public File getRandFile() {
         return new File(this.getRandFilePath(), this.getRandFileType());
     }
 
+    /**
+     * Creates a random form
+     * @return A random form
+     */
     public Form getRandForm() {
         HashMap<String, String> fields = new HashMap<>();
         fields.put("Favorite color", this.getRandColor());
@@ -80,6 +158,10 @@ class DataGenerator {
         return new Form(fields);
     }
 
+    /**
+     * Creates a random IP
+     * @return A random IP
+     */
     public String getRandIP() {
         return rand.nextInt(256) + "." + rand.nextInt(256) + "." + rand.nextInt(256) + "." + rand.nextInt(256);
     }
