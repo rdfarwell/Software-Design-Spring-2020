@@ -38,8 +38,11 @@ public class GuessNumberGUI extends JFrame {
         super("Color Guesser");
         setLayout(new FlowLayout());
 
-        JLabel prompt = new JLabel("Please enter a number between 1 and 1000");
+        JLabel prompt = new JLabel("I have a number between 1 and 1000. Can you guess my number?");
         add(prompt);
+
+        JLabel inst = new JLabel("Please enter your guess:");
+        add(inst);
 
         guess = new JTextField(5);
         add(guess);

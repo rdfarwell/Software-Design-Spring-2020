@@ -14,7 +14,7 @@ public class GuessNumber {
     public static void main(String[] args) {
         GuessNumberGUI gui = new GuessNumberGUI(); // creates a new GuessNumberGUI object
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(400, 200);
+        gui.setSize(450, 150);
         gui.setVisible(true);
     }
 }
