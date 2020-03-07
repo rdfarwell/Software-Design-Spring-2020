@@ -22,6 +22,11 @@ public class Encrypt {
         int n, key;
         int[] keyArray;
 
+        if (message.length() > 1000) {
+            System.out.println("Error: Too large of a message");
+            return;
+        }
+
         fileName = "oral_exam1/S102_OneTimePad_Hard/src/" + fileName;
 
         // creates the file where the encrypted message will be written

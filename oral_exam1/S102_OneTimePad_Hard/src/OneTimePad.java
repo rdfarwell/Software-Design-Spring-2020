@@ -41,7 +41,7 @@ public class OneTimePad {
             }
 
             if (choice == 1) { //generate key file
-                System.out.println("Please enter an integer for the number of keys you would like:");
+                System.out.println("Please enter an integer for the number of keys you would like (no higher than 250):");
                 try { // uses String (nextLine) casted to Integer to avoid a  bug found when not taking in all end-line characters
                     input = Integer.parseInt(scnr.nextLine());
                     KeyGenerator.generator(input);
@@ -55,7 +55,7 @@ public class OneTimePad {
             else if (choice == 2) { // encrypt
                 System.out.println("Please enter the location of the key file:");
                 keyFileLocation = scnr.nextLine();
-                System.out.println("Please enter your message:");
+                System.out.println("Please enter your message (no more than 1000 characters):");
                 message = scnr.nextLine();
                 Encrypt.encryptor(keyFileLocation, message.toUpperCase());
                 choice = 0;
@@ -74,6 +74,8 @@ public class OneTimePad {
             else if (choice != 4) { // if the entry isn't one of the three options, set to 0 (loop condition)
                 choice = 0;
             }
+
+            System.out.println("Complete");
         }
 
 

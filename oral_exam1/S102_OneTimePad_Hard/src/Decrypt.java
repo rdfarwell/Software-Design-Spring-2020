@@ -22,7 +22,7 @@ public class Decrypt {
         boolean changed;
         String message = "", messageFromFile = "", encryptedMessage = "";
         int keyStart = 0, n, key;
-        char[] encryptedFile = new char[100];
+        char[] encryptedFile = new char[1000];
         Arrays.fill(encryptedFile, 'z');
 
         keyFile = "oral_exam1/S102_OneTimePad_Hard/src/" + keyFile;

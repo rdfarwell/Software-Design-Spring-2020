@@ -58,9 +58,9 @@ public class ReadKeyFile {
      */
     public ReadKeyFile(String fileName) throws IOException {
         String keyFromFile = "", keyToInt = "";
-        int k = 0;
-        char[] readIn = new char[100];
-        Arrays.fill(readIn, 'z');
+        int k = 0; // iterate through the key array
+        char[] readIn = new char[1000];
+        Arrays.fill(readIn, 'z'); // for checking later
 
         FileReader file = null; // create FileReader to read in key file
         try {

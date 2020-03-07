@@ -22,6 +22,11 @@ public class KeyGenerator {
         FileWriter keyFile = new FileWriter("oral_exam1/S102_OneTimePad_Hard/src/key.txt"); // creates a file key.txt to write the keys to
         keyFile.write("0\n"); // all key files start at position zero for future transcoding
 
+        if (n > 250) {
+            System.out.println("Error: Value of n too large");
+            return;
+        }
+
         for (int i = 0; i < n; i++) {
             keyFile.write(Integer.toString(rand.nextInt(26))); // generates random numbers to be written to file within given range
             if (i < (n - 1)) {
