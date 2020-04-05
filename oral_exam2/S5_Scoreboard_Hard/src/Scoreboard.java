@@ -2,14 +2,19 @@ public abstract class Scoreboard {
 
     private Team team1;
     private Team team2;
-    private int periods;
+    private int periods = 0;
+    private int currentPeriod = 0;
     private String[] scoringMethods;
+    private String periodName;
+    private int periodLength;
 
 
-    public Scoreboard(String team1Name, String team2Name, int periods) {
+    public Scoreboard(String team1Name, String team2Name, int periods, String periodName, int periodLength) {
         team1 = new Team(team1Name);
         team2 = new Team(team2Name);
         this.periods = periods;
+        this.periodName = periodName;
+        this.periodLength = periodLength;
     }
 
     public void addScore(int points, String team) {
@@ -35,5 +40,42 @@ public abstract class Scoreboard {
 
     public int getTeam2Score() {
         return team2.getScore();
+    }
+
+    public String[] getScoringMethods() {
+        return scoringMethods;
+    }
+
+    public int getPeriodLength() {
+        return periodLength;
+    }
+
+    public void endPeriod() {
+        currentPeriod++;
+    }
+
+    public int getCurrentPeriod() {
+        return currentPeriod;
+    }
+
+    public String getPeriodName() {
+        return periodName;
+    }
+
+    public void startGame() {
+        currentPeriod = 1;
+    }
+
+    public boolean gameOver() {
+        return currentPeriod > periods;
+    }
+
+    public String winningTeam() {
+        if (team1.getScore() > team2.getScore()) {
+            return team1.getName();
+        }
+        else {
+            return team2.getName();
+        }
     }
 }
