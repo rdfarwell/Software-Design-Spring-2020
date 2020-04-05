@@ -29,6 +29,9 @@ public class Main {
         while (!ended) {
             System.out.println("Menu:");
 
+
+            ended = true;
+
         }
 
 
