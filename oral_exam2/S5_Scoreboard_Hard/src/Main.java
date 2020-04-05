@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        boolean ended = false;
         String team1, team2, choice = "0";
         Scoreboard scoreboard;
+        int x = 1;
 
         Scanner scnr = new Scanner(System.in);
 
@@ -29,14 +29,34 @@ public class Main {
         System.out.println("Enter Team 2:");
         team2 = scnr.nextLine().trim();
 
-//        if (choice.equals("1")) {
-//            scoreboard = new Football(team1, team2);
-//        }
-//
-//        while (!scoreboard.gameOver()) {
-//            System.out.println("Menu:");
-//
-//        }
+        if (choice.equals("1")) {
+            scoreboard = new Football(team1, team2);
+        }
+        else if (choice.equals("2")) {
+            scoreboard = new Baseball(team1,team2);
+        }
+        else if (choice.equals("3")) {
+            scoreboard = new Soccer(team1, team2);
+        }
+        else {
+            scoreboard = new Hockey(team1, team2);
+        }
+
+        while (!scoreboard.gameOver()) {
+            x = 1;
+            System.out.println("Menu:");
+            for (String scoringMethod : scoreboard.getScoringMethods()) {
+                System.out.println(x + ": " + scoreboard.getTeam1() + " " + scoringMethod);
+                x++;
+            }
+            for (String scoringMethod : scoreboard.getScoringMethods()) {
+                System.out.println(x + ": " + scoreboard.getTeam2() + " " + scoringMethod);
+                x++;
+            }
+            System.out.println(x + ": End " + scoreboard.getPeriodName());
+
+
+        }
 
 
 
