@@ -5,7 +5,7 @@ public class Main {
 
         String team1, team2, choice = "0";
         Scoreboard scoreboard;
-        int x = 1;
+        int x;
 
         Scanner scnr = new Scanner(System.in);
 
@@ -29,18 +29,18 @@ public class Main {
         System.out.println("Enter Team 2:");
         team2 = scnr.nextLine().trim();
 
-        if (choice.equals("1")) {
+//        if (choice.equals("1")) {
             scoreboard = new Football(team1, team2);
-        }
-        else if (choice.equals("2")) {
-            scoreboard = new Baseball(team1,team2);
-        }
-        else if (choice.equals("3")) {
-            scoreboard = new Soccer(team1, team2);
-        }
-        else {
-            scoreboard = new Hockey(team1, team2);
-        }
+//        }
+//        else if (choice.equals("2")) {
+//            scoreboard = new Basketball(team1,team2);
+//        }
+//        else if (choice.equals("3")) {
+//            scoreboard = new Soccer(team1, team2);
+//        }
+//        else {
+//            scoreboard = new Hockey(team1, team2);
+//        }
 
         while (!scoreboard.gameOver()) {
             x = 1;
@@ -54,6 +54,12 @@ public class Main {
                 x++;
             }
             System.out.println(x + ": End " + scoreboard.getPeriodName());
+            choice = scnr.nextLine().trim();
+            if (choice.equals(Integer.toString(x))) {
+                scoreboard.endPeriod();
+
+            }
+
 
 
         }

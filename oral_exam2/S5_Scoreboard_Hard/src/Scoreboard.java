@@ -2,22 +2,23 @@ public abstract class Scoreboard {
 
     private Team team1;
     private Team team2;
-    private int periods = 0;
-    private int currentPeriod = 0;
+    private int periods;
+    private int currentPeriod = 1;
     private String[] scoringMethods;
     private String periodName;
     private int periodLength;
 
 
-    public Scoreboard(String team1Name, String team2Name, int periods, String periodName, int periodLength) {
+    public Scoreboard(String team1Name, String team2Name, int periods, String periodName, int periodLength, String[] scoringMethods) {
         team1 = new Team(team1Name);
         team2 = new Team(team2Name);
         this.periods = periods;
         this.periodName = periodName;
         this.periodLength = periodLength;
+        this.scoringMethods = scoringMethods;
     }
 
-    public void addScore(int points, String team) {
+    public void addScore(int points, String team, String scoreMethod) {
         if (team.equals("1")) {
             team1.addScore(points);
         }
