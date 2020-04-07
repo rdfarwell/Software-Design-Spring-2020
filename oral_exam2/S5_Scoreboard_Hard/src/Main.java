@@ -76,7 +76,7 @@ public class Main {
                 if (choiceNum <= ((x-1)/2)) { // team1
                     scoreboard.addScore(0, "1", scoreboard.getScoringMethods()[choiceNum-1]);
                 }
-                else if (choiceNum >= ((x-1)/2) && choiceNum != x) { // team2
+                else if (choiceNum > ((x-1)/2) && choiceNum != x) { // team2
                     scoreboard.addScore(0, "2", scoreboard.getScoringMethods()[choiceNum-((x-1)/2)-1]);
                 }
                 else {
