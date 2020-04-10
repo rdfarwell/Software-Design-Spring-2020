@@ -3,6 +3,7 @@ public class Basketball extends Scoreboard {
         super(team1name, team2Name, 4, "Quarter", 12, new String[] {"2-Point Basket", "3-Point Basket", "Free Throw"});
     }
 
+    @Override
     public void addScore(int points, String team, String scoreMethod) {
         if (scoreMethod.equals("2-Point Basket")) {
             points = 2;

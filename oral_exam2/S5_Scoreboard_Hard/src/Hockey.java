@@ -3,6 +3,7 @@ public class Hockey extends Scoreboard {
         super(team1name, team2Name, 3, "Period", 20, new String[] {"Goal"});
     }
 
+    @Override
     public void addScore(int points, String team, String scoreMethod) {
         points = 1;
 

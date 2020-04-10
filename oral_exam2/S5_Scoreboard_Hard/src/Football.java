@@ -3,6 +3,7 @@ public class Football extends Scoreboard{
         super(team1name, team2Name, 4, "Quarter", 15, new String[] {"Touchdown", "Extra Point", "Two-Point Conversion", "Field Goal", "Safety"});
     }
 
+    @Override
     public void addScore(int points, String team, String scoreMethod) {
         if (scoreMethod.equals("Touchdown")) {
             points = 6;

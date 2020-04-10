@@ -3,6 +3,7 @@ public class Soccer extends Scoreboard{
         super(team1name, team2Name, 2, "Half", 45, new String[] {"Goal"});
     }
 
+    @Override
     public void addScore(int points, String team, String scoreMethod) {
         points = 1;
 

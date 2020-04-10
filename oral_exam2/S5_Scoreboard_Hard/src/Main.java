@@ -86,14 +86,11 @@ public class Main {
                 if (scoreboard.gameOver()) {
                     System.out.println("Game Over!");
 
-                    if (scoreboard.getTeam1Score() > scoreboard.getTeam2Score()) {
-                        System.out.println(scoreboard.getTeam1() + " wins!");
-                    }
-                    else if (scoreboard.getTeam1Score() < scoreboard.getTeam2Score()) {
-                        System.out.println(scoreboard.getTeam2() + " wins!");
+                    if (scoreboard.getTeam1Score() == scoreboard.getTeam2Score()) {
+                        System.out.println("It's a tie!");
                     }
                     else {
-                        System.out.println("It's a tie!");
+                        System.out.println(scoreboard.winningTeam() + " wins!");
                     }
 
                     System.out.println(scoreboard.getTeam1() + " - " + scoreboard.getTeam1Score());
