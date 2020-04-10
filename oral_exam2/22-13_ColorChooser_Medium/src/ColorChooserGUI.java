@@ -13,7 +13,7 @@ public class ColorChooserGUI extends JFrame {
     private final JSlider redSlide;
     private final JSlider greenSlide;
     private final JSlider blueSlide;
-    // private final JPanel color;
+    private final Rectangle color;
 
     public ColorChooserGUI() {
         super("Color Chooser");
@@ -46,6 +46,9 @@ public class ColorChooserGUI extends JFrame {
         blueSlide = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
         add(blueSlide);
 
+        color = new Rectangle();
+        add(color);
+
         ActionHandler handler = new ActionHandler();
         red.addActionListener(handler);
         green.addActionListener(handler);
@@ -55,12 +58,6 @@ public class ColorChooserGUI extends JFrame {
         redSlide.addChangeListener(change);
         greenSlide.addChangeListener(change);
         blueSlide.addChangeListener(change);
-
-//        color = new JPanel();
-//        color.paintComponents(color.getGraphics());
-//        color.getGraphics().setColor(Color.red);
-//        color.getGraphics().fillRect(100, 100, 200, 100);
-//        add(color);
 
     }
 
@@ -94,15 +91,15 @@ public class ColorChooserGUI extends JFrame {
         }
     }
 
-//    public class Rectangle extends JPanel {
-//
-//        public void paintComponent(Graphics g) { //, int red, int blue, int green
-//            super.paintComponent(g);
-//
-//            g.setColor(Color.red); //red, green, blue
-//            g.fillRect(100, 100, 90, 60);
-//        }
-//    }
+    public static class Rectangle extends JPanel {
+        @Override
+        public void paint(Graphics g) { //, int red, int blue, int green
+            super.paint(g);
+
+            g.setColor(Color.red); //red, green, blue
+            g.fillRect(100, 100, 90, 60);
+        }
+    }
 
 
 }
