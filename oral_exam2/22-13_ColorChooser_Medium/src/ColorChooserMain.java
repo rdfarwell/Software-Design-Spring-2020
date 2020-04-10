@@ -7,6 +7,11 @@ import javax.swing.*;
  * @author Dean Farwell
  */
 public class ColorChooserMain {
+
+    /**
+     * Main method to run the entire program
+     * @param args String of arguments necessary for Java
+     */
         public static void main(String[] args) {
             JFrame frame = new JFrame("Color Chooser");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
