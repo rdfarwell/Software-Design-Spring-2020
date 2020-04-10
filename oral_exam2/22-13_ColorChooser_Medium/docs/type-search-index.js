@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"ColorChooserGUI.ActionHandler"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"ColorChooserGUI.ChangeHandler"},{"p":"<Unnamed>","l":"ColorChooserGUI"},{"p":"<Unnamed>","l":"ColorChooserMain"}]
