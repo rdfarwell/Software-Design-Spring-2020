@@ -24,7 +24,6 @@ public class Hockey extends Scoreboard {
     @Override
     public void addScore(int points, String team, String scoreMethod) {
         points = 1;
-
         super.addScore(points, team, scoreMethod);
     }
 }
