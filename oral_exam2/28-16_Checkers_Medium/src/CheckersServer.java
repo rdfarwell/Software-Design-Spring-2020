@@ -1,6 +1,3 @@
-// Fig. 28.11: TicTacToeServer.java
-// Server side of client/server Tic-Tac-Toe program.
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
