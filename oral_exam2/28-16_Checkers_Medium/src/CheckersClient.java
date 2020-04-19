@@ -267,6 +267,8 @@ public class CheckersClient extends JFrame implements Runnable {
             }
             else {
                 g.drawString(mark, 11, 20);
+//                g.setColor(Color.white);
+//                g.fillOval(5, 5, 20, 20);
             }
             //g.drawString(mark, 11, 20); // draw mark
         }

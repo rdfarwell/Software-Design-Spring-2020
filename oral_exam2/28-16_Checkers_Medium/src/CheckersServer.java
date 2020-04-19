@@ -135,7 +135,7 @@ public class CheckersServer extends JFrame {
         }
 
         // if location not occupied, make move
-        if (!isOccupied(newLocation)) {
+        if (!isOccupied(newLocation) && validCheckerMove(oldLocation, newLocation)) {
             board[newLocation] = MARKS[currentPlayer]; // set move on board
             board[oldLocation] = " ";
             currentPlayer = (currentPlayer + 1) % 2; // change player
@@ -164,6 +164,44 @@ public class CheckersServer extends JFrame {
         else {
             return false; // location is not occupied
         }
+    }
+
+    public boolean validCheckerMove(int oldLocation, int newLocation) {
+        boolean validSpace;
+        if ((newLocation % 2 == 1) && ((newLocation > 7 && newLocation < 16) || (newLocation > 23 && newLocation < 32) || (newLocation > 39 && newLocation < 48) || newLocation > 55)) { // odd spaces
+            validSpace = true;
+        }
+        else if ((newLocation % 2 == 0) && (newLocation < 8 || (newLocation > 15 && newLocation < 24) || (newLocation > 31 && newLocation < 40) || (newLocation > 47 && newLocation < 56))) { // even
+            validSpace = true;
+        }
+        else {
+            validSpace = false;
+        }
+
+        if (validSpace) {
+            if (currentPlayer == 0) {// R
+                if ((newLocation == (oldLocation + 7)) || (newLocation == (oldLocation + 9))) {
+                    validSpace = true;
+                }
+                else {
+                    validSpace = false;
+                }
+            }
+            else if (currentPlayer == 1) { // B
+                if ((newLocation == (oldLocation - 7)) || (newLocation == (oldLocation - 9))) {
+                    validSpace = true;
+                }
+                else {
+                    validSpace = false;
+                }
+            }
+        }
+
+        if (validSpace) {
+            return true;
+        }
+
+        return false;
     }
 
     // place code in this method to determine whether game over
@@ -199,8 +237,8 @@ public class CheckersServer extends JFrame {
         // send message that other player moved
         public void otherPlayerMoved(int newLocation, int oldLocation) {
             output.format("Opponent moved\n");
-            output.format("%d\n", newLocation); // send location of move
-            output.format("%d\n", oldLocation);
+            output.format("%d\n", oldLocation); // send location of move
+            output.format("%d\n", newLocation);
             output.flush(); // flush output
         }
 
@@ -262,7 +300,8 @@ public class CheckersServer extends JFrame {
                     if (board[location].equals(MARKS[currentPlayer]) && !isOccupied(location2)) {
                         // check for valid move
                         if (validateAndMove(location, location2, playerNumber)) {
-                            displayMessage("\nlocation: " + location2);
+                            displayMessage("\nFrom location: " + location);
+                            displayMessage("\nTo location: " + location2);
                             output.format("Valid move.\n"); // notify client
                             output.flush(); // flush output
                         }
