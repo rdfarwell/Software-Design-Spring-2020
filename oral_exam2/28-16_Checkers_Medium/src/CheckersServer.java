@@ -81,10 +81,6 @@ public class CheckersServer extends JFrame {
         setVisible(true); // show window
     }
 
-    public void getStartMarks(int i) {
-
-    }
-
     // wait for two connections so game can be played
     public void execute() {
         // wait for each client to connect
@@ -93,7 +89,8 @@ public class CheckersServer extends JFrame {
             {
                 players[i] = new Player(server.accept(), i);
                 runGame.execute(players[i]); // execute player runnable
-            } catch (IOException ioException) {
+            }
+            catch (IOException ioException) {
                 ioException.printStackTrace();
                 System.exit(1);
             }
@@ -123,7 +120,7 @@ public class CheckersServer extends JFrame {
     }
 
     // determine if move is valid
-    public boolean validateAndMove(int location, int player) {
+    public boolean validateAndMove(int oldLocation, int newLocation, int player) {
         // while not current player, must wait for turn
         while (player != currentPlayer) {
             gameLock.lock(); // lock game to wait for other player to go
@@ -138,12 +135,13 @@ public class CheckersServer extends JFrame {
         }
 
         // if location not occupied, make move
-        if (!isOccupied(location)) {
-            board[location] = MARKS[currentPlayer]; // set move on board
+        if (!isOccupied(newLocation)) {
+            board[newLocation] = MARKS[currentPlayer]; // set move on board
+            board[oldLocation] = " ";
             currentPlayer = (currentPlayer + 1) % 2; // change player
 
             // let new current player know that move occurred
-            players[currentPlayer].otherPlayerMoved(location);
+            players[currentPlayer].otherPlayerMoved(oldLocation, newLocation);
 
             gameLock.lock(); // lock game to signal other player to go
 
@@ -199,9 +197,10 @@ public class CheckersServer extends JFrame {
         }
 
         // send message that other player moved
-        public void otherPlayerMoved(int location) {
+        public void otherPlayerMoved(int newLocation, int oldLocation) {
             output.format("Opponent moved\n");
-            output.format("%d\n", location); // send location of move
+            output.format("%d\n", newLocation); // send location of move
+            output.format("%d\n", oldLocation);
             output.flush(); // flush output
         }
 
@@ -262,7 +261,7 @@ public class CheckersServer extends JFrame {
 
                     if (board[location].equals(MARKS[currentPlayer]) && !isOccupied(location2)) {
                         // check for valid move
-                        if (validateAndMove(location2, playerNumber)) {
+                        if (validateAndMove(location, location2, playerNumber)) {
                             displayMessage("\nlocation: " + location2);
                             output.format("Valid move.\n"); // notify client
                             output.flush(); // flush output

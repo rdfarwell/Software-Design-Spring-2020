@@ -19,6 +19,7 @@ public class CheckersClient extends JFrame implements Runnable {
     private JPanel panel2; // panel to hold board
     private Square[][] board; // tic-tac-toe board
     private Square currentSquare; // current square
+    private Square lastSquare;
     private Socket connection; // connection to server
     private Scanner input; // input from server
     private Formatter output; // output to server
@@ -136,17 +137,27 @@ public class CheckersClient extends JFrame implements Runnable {
         if (message.equals("Valid move.")) {
             displayMessage("Valid move, please wait.\n");
             setMark(currentSquare, myMark); // set mark in square
+            setMark(lastSquare, " ");
         } else if (message.equals("Invalid move, try again")) {
             displayMessage(message + "\n"); // display invalid move
             myTurn = true; // still this client's turn
         } else if (message.equals("Opponent moved")) {
             int location = input.nextInt(); // get move location
             input.nextLine(); // skip newline after int location
+            int oldLocation = input.nextInt();
+            input.nextLine();
+            System.out.println(location);
+            System.out.println(oldLocation);
             int row = location / 8; // calculate row
             int column = location % 8; // calculate column
+            int oldRow = oldLocation / 8;
+            int oldColumn = oldLocation % 8;
+            setMark(board[row][column], (myMark.equals(R_MARK) ? B_MARK : R_MARK)); // mark move
+            setMark(board[oldRow][oldColumn], " ");
 
-            setMark(board[row][column],
-                    (myMark.equals(R_MARK) ? B_MARK : R_MARK)); // mark move
+            System.out.println(board[row][column].getMark());
+            System.out.println(board[oldRow][oldColumn].getMark());
+
             displayMessage("Opponent moved. Your turn.\n");
             myTurn = true; // now this client's turn
         } else
@@ -165,7 +176,7 @@ public class CheckersClient extends JFrame implements Runnable {
     }
 
     // utility method to set mark on board in event-dispatch thread
-    private void setMark(final Square squareToMark, final String mark) {
+    private void setMark(final Square squareToMark, final String mark) { //
         SwingUtilities.invokeLater(
                 new Runnable() {
                     public void run() {
@@ -190,6 +201,10 @@ public class CheckersClient extends JFrame implements Runnable {
         currentSquare = square; // set current square to argument
     }
 
+    public void setLastSquare(Square square) {
+        lastSquare = square;
+    }
+
     // private inner class for the squares on the board
     private class Square extends JPanel {
         private String mark; // mark to be drawn in this square
@@ -202,6 +217,7 @@ public class CheckersClient extends JFrame implements Runnable {
             addMouseListener(
                     new MouseAdapter() {
                         public void mouseReleased(MouseEvent e) {
+                            setLastSquare(currentSquare);
                             setCurrentSquare(Square.this); // set current square
 
                             // send location of this square
@@ -225,6 +241,10 @@ public class CheckersClient extends JFrame implements Runnable {
         public void setMark(String newMark) {
             mark = newMark; // set mark of square
             repaint(); // repaint square
+        }
+
+        public String getMark() {
+            return mark;
         }
 
         // return Square location
