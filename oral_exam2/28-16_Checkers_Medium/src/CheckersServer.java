@@ -15,9 +15,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CheckersServer extends JFrame {
-    private final static int PLAYER_X = 0; // constant for first player
-    private final static int PLAYER_O = 1; // constant for second player
-    private final static String[] MARKS = {"X", "O"}; // array of marks
+    private final static int PLAYER_R = 0; // constant for first player
+    private final static int PLAYER_B = 1; // constant for second player
+    private final static String[] MARKS = {"R", "B"}; // array of marks
     private String[] board = new String[64]; // tic-tac-toe board
     private JTextArea outputArea; // for outputting moves
     private Player[] players; // array of Players
@@ -45,10 +45,10 @@ public class CheckersServer extends JFrame {
         for (int i = 0; i < 64; i++) {
             if (i % 2 == 1) { // odd
                 if (i > 7 && i < 16) {
-                    board[i] = "X";
+                    board[i] = "R";
                 }
                 else if ((i > 39 && i < 48) || i > 55) {
-                    board[i] = "O";
+                    board[i] = "B";
                 }
                 else {
                     board[i] = "";
@@ -56,10 +56,10 @@ public class CheckersServer extends JFrame {
             }
             else { // even
                 if (i < 8 || (i > 15 && i < 24)) {
-                    board[i] = "X";
+                    board[i] = "R";
                 }
                 else if (i > 47 && i < 56) {
-                    board[i] = "O";
+                    board[i] = "B";
                 }
                 else {
                     board[i] = "";
@@ -67,7 +67,7 @@ public class CheckersServer extends JFrame {
             }
         }
         players = new Player[2]; // create array of players
-        currentPlayer = PLAYER_X; // set current player to first player
+        currentPlayer = PLAYER_R; // set current player to first player
 
         try {
             server = new ServerSocket(12345, 2); // set up ServerSocket
@@ -105,7 +105,7 @@ public class CheckersServer extends JFrame {
         gameLock.lock(); // lock game to signal player X's thread
 
         try {
-            players[PLAYER_X].setSuspended(false); // resume player X
+            players[PLAYER_R].setSuspended(false); // resume player X
             otherPlayerConnected.signal(); // wake up player X's thread
         } finally {
             gameLock.unlock(); // unlock game after signalling player X
@@ -163,7 +163,7 @@ public class CheckersServer extends JFrame {
 
     // determine whether location is occupied
     public boolean isOccupied(int location) {
-        if (board[location].equals(MARKS[PLAYER_X]) || board[location].equals(MARKS[PLAYER_O])) {
+        if (board[location].equals(MARKS[PLAYER_R]) || board[location].equals(MARKS[PLAYER_B])) {
             return true; // location is occupied
         }
         else {
@@ -217,7 +217,7 @@ public class CheckersServer extends JFrame {
                 output.flush(); // flush output
 
                 // if player X, wait for another player to arrive
-                if (playerNumber == PLAYER_X) {
+                if (playerNumber == PLAYER_R) {
                     output.format("%s\n%s", "Player X connected",
                             "Waiting for another player\n");
                     output.flush(); // flush output
@@ -238,24 +238,44 @@ public class CheckersServer extends JFrame {
                     output.format("Other player connected. Your move.\n");
                     output.flush(); // flush output
                 } else {
-                    output.format("Player O connected, please wait\n");
+                    output.format("Player B connected, please wait\n");
                     output.flush(); // flush output
                 }
 
                 // while game not over
                 while (!isGameOver()) {
                     int location = 0; // initialize move location
+                    int location2 = 0;
+                    int locCount = 0;
 
-                    if (input.hasNext())
-                        location = input.nextInt(); // get move location
+                    while (locCount < 2) { // used to be if
+                        if (input.hasNext()) {
+                            if (locCount == 0) {
+                                location = input.nextInt(); // get move location
+                                System.out.println(location);
+                                locCount++;
+                            }
+                            else {
+                                location2 = input.nextInt();
+                                System.out.println(location2);
+                                locCount++;
+                            }
+                        }
+                    }
 
-                    // check for valid move
-                    if (validateAndMove(location, playerNumber)) {
-                        displayMessage("\nlocation: " + location);
-                        output.format("Valid move.\n"); // notify client
-                        output.flush(); // flush output
-                    } else // move was invalid
-                    {
+                    if (board[location].equals(MARKS[currentPlayer]) && !isOccupied(location2)) {
+                        // check for valid move
+                        if (validateAndMove(location2, playerNumber)) {
+                            displayMessage("\nlocation: " + location2);
+                            output.format("Valid move.\n"); // notify client
+                            output.flush(); // flush output
+                        }
+                        else { // move was invalid
+                            output.format("Invalid move, try again\n");
+                            output.flush(); // flush output
+                        }
+                    }
+                    else {
                         output.format("Invalid move, try again\n");
                         output.flush(); // flush output
                     }
@@ -263,7 +283,8 @@ public class CheckersServer extends JFrame {
             } finally {
                 try {
                     connection.close(); // close connection to client
-                } catch (IOException ioException) {
+                }
+                catch (IOException ioException) {
                     ioException.printStackTrace();
                     System.exit(1);
                 }

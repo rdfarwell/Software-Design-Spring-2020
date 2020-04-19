@@ -1,6 +1,3 @@
-// Fig. 28.13: TicTacToeClient.java
-// Client side of client/server Tic-Tac-Toe program.
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,8 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CheckersClient extends JFrame implements Runnable {
-    private final String X_MARK = "X"; // mark for first client
-    private final String O_MARK = "O"; // mark for second client
+    private final String R_MARK = "R"; // mark for first client
+    private final String B_MARK = "B"; // mark for second client
     private JTextField idField; // textfield to display player's mark
     private JTextArea displayArea; // JTextArea to display output
     private JPanel boardPanel; // panel for tic-tac-toe board
@@ -45,10 +42,10 @@ public class CheckersClient extends JFrame implements Runnable {
         for (int i = 0; i < 64; i++) {
             if (i % 2 == 1) { // odd
                 if (i > 7 && i < 16) {
-                    markArray[i] = "X";
+                    markArray[i] = "R";
                 }
                 else if ((i > 39 && i < 48) || i > 55) {
-                    markArray[i] = "O";
+                    markArray[i] = "B";
                 }
                 else {
                     markArray[i] = " ";
@@ -56,10 +53,10 @@ public class CheckersClient extends JFrame implements Runnable {
             }
             else { // even
                 if (i < 8 || (i > 15 && i < 24)) {
-                    markArray[i] = "X";
+                    markArray[i] = "R";
                 }
                 else if (i > 47 && i < 56) {
-                    markArray[i] = "O";
+                    markArray[i] = "B";
                 }
                 else {
                     markArray[i] = " ";
@@ -124,7 +121,7 @@ public class CheckersClient extends JFrame implements Runnable {
                 }
         );
 
-        myTurn = (myMark.equals(X_MARK)); // determine if client's turn
+        myTurn = (myMark.equals(R_MARK)); // determine if client's turn
 
         // receive messages sent to client and output them
         while (true) {
@@ -149,7 +146,7 @@ public class CheckersClient extends JFrame implements Runnable {
             int column = location % 8; // calculate column
 
             setMark(board[row][column],
-                    (myMark.equals(X_MARK) ? O_MARK : X_MARK)); // mark move
+                    (myMark.equals(R_MARK) ? B_MARK : R_MARK)); // mark move
             displayMessage("Opponent moved. Your turn.\n");
             myTurn = true; // now this client's turn
         } else
@@ -184,7 +181,7 @@ public class CheckersClient extends JFrame implements Runnable {
         if (myTurn) {
             output.format("%d\n", location); // send location to server
             output.flush();
-            myTurn = false; // not my turn any more
+            //myTurn = false; // not my turn any more
         }
     }
 
@@ -240,11 +237,11 @@ public class CheckersClient extends JFrame implements Runnable {
             super.paintComponent(g);
 
             g.drawRect(0, 0, 29, 29); // draw square
-            if (mark.equals("X")) {
+            if (mark.equals("R")) {
                 g.setColor(Color.red);
                 g.fillOval(5, 5, 20, 20);
             }
-            else if (mark.equals("O")) {
+            else if (mark.equals("B")) {
                 g.setColor(Color.black);
                 g.fillOval(5, 5, 20, 20);
             }
