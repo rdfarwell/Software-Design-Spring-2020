@@ -138,18 +138,62 @@ public class CheckersClient extends JFrame implements Runnable {
             displayMessage("Valid move, please wait.\n");
             setMark(currentSquare, myMark); // set mark in square
             setMark(lastSquare, " ");
+        } else if (message.equals("Capture.")) {
+            displayMessage("Valid capture, please wait.\n");
+            setMark(currentSquare, myMark);
+            setMark(lastSquare, " ");
+            if (currentSquare.getSquareLocation() == lastSquare.getSquareLocation() + 14) {
+                setMark(board[(lastSquare.getSquareLocation() + 7) / 8][(lastSquare.getSquareLocation() + 7) % 8], " ");
+            }
+            else if (currentSquare.getSquareLocation() == lastSquare.getSquareLocation() + 18) {
+                setMark(board[(lastSquare.getSquareLocation() + 9) / 8][(lastSquare.getSquareLocation() + 9) % 8], " ");
+            }
+            else if (currentSquare.getSquareLocation() == lastSquare.getSquareLocation() - 14) {
+                setMark(board[(lastSquare.getSquareLocation() - 7) / 8][(lastSquare.getSquareLocation() - 7) % 8], " ");
+            }
+            else if (currentSquare.getSquareLocation() == lastSquare.getSquareLocation() - 18) {
+                setMark(board[(lastSquare.getSquareLocation() - 9) / 8][(lastSquare.getSquareLocation() - 9) % 8], " ");
+            }
         } else if (message.equals("Invalid move, try again")) {
             displayMessage(message + "\n"); // display invalid move
             myTurn = true; // still this client's turn
-        } else if (message.equals("Opponent moved")) {
-            int location = input.nextInt(); // get move location
+        } else if (message.equals("Opponent captured")) {
+            int newLocation = input.nextInt(); // get move location
             input.nextLine(); // skip newline after int location
             int oldLocation = input.nextInt();
             input.nextLine();
-            System.out.println(location);
+            int capturedLocation = input.nextInt();
+            input.nextLine();
+            int row = newLocation / 8; // calculate row
+            int column = newLocation % 8; // calculate column
+            int oldRow = oldLocation / 8;
+            int oldColumn = oldLocation % 8;
+            int capRow = capturedLocation / 8;
+            int capColumn = capturedLocation % 8;
+
+            System.out.println("old: " + oldLocation);
+            System.out.println("new: " + newLocation);
+            System.out.println("cap: " + capturedLocation);
+            System.out.println("cap R: " + capRow);
+            System.out.println("cap C: " + capColumn);
+
+            setMark(board[row][column], (myMark.equals(R_MARK) ? B_MARK : R_MARK)); // mark move
+            setMark(board[oldRow][oldColumn], " ");
+            setMark(board[capRow][capColumn], " ");
+
+            System.out.println("cap: " + board[capRow][capColumn].getMark());
+
+            displayMessage("Opponent captured. Your turn.\n");
+            myTurn = true; // now this client's turn
+        } else if (message.equals("Opponent moved")) {
+            int newLocation = input.nextInt(); // get move location
+            input.nextLine(); // skip newline after int location
+            int oldLocation = input.nextInt();
+            input.nextLine();
+            System.out.println(newLocation);
             System.out.println(oldLocation);
-            int row = location / 8; // calculate row
-            int column = location % 8; // calculate column
+            int row = newLocation / 8; // calculate row
+            int column = newLocation % 8; // calculate column
             int oldRow = oldLocation / 8;
             int oldColumn = oldLocation % 8;
             setMark(board[row][column], (myMark.equals(R_MARK) ? B_MARK : R_MARK)); // mark move
