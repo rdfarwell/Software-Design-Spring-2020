@@ -14,9 +14,9 @@ import java.util.regex.PatternSyntaxException;
 
 public class DisplayQueryResults extends JFrame {
     // database URL, username and password
-    private static final String DATABASE_URL = "jdbc:derby:books";
-    private static final String USERNAME = "deitel";
-    private static final String PASSWORD = "deitel";
+    private static final String DATABASE_URL = "jdbc:mysql://s-l112.engr.uiowa.edu:3306/books";
+    private static final String USERNAME = "swd-Sp2020";
+    private static final String PASSWORD = "swd-Sp2020";
 
     // default query retrieves all data from authors table
     private static final String DEFAULT_QUERY = "SELECT * FROM authors";
