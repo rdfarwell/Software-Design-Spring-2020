@@ -15,6 +15,7 @@ public class MazeTraversal {
             }
             System.out.print("\n");
         }
+        System.out.print("\n");
 
         try {
             if (maze[startRow][startColumn + 1] == '.') { // down
@@ -46,7 +47,6 @@ public class MazeTraversal {
         catch (ArrayIndexOutOfBoundsException outOfMaze) {
 
         }
-
 
         return maze;
     }
