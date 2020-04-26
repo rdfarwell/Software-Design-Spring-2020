@@ -4,6 +4,8 @@ public class CannyEdgeDetectorMain {
 
         inputImage = BitmapConverter.bitmapConverter();
         newArray = ImageProcessor.addZeroPad(inputImage);
+        newArray = ImageProcessor.cannyEdgeDetector(newArray);
+        BitmapConverter.arrayConverter(newArray);
 
 
 
