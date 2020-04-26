@@ -1,7 +1,7 @@
 public class MazeTraversalMain {
     public static void main(String[] args) {
         char[][] maze = new char[12][12];
-        int startRow = 1, startColumn = 0;
+        int startRow = 10, startColumn = 11;
         maze[0] = new char[]{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
         maze[1] = new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#'};
         maze[2] = new char[]{'#', '.', '#', '#', '#', '#', '#', '#', '.', '#', '.', '#'};
@@ -15,7 +15,7 @@ public class MazeTraversalMain {
         maze[10] = new char[]{'#', '.', '#', '.', '.', '.', '.', '.', '.', '.', '.', '.'};
         maze[11] = new char[]{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
 
-        maze = MazeTraversal.mazeTraversal(maze, startRow, startColumn);
+        maze = MazeTraversal.mazeTraversal(maze, startRow, startColumn, 1);
 
         for (int x = 0; x < maze.length; x++) {
             for (int y = 0; y < maze[x].length; y++) {
@@ -33,7 +33,5 @@ public class MazeTraversalMain {
             }
             System.out.print("\n");
         }
-
-
     }
 }
