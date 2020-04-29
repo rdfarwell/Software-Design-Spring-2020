@@ -5,7 +5,7 @@ import java.io.File;
 
 public class BitmapConverter {
     public static int[][] bitmapConverter() throws Exception{
-        BufferedImage img = ImageIO.read(new File("oral_exam2/S26_CannyEdgeDetector/SampleSquareImage.bmp"));
+        BufferedImage img = ImageIO.read(new File("oral_exam2/S26_CannyEdgeDetector_Easy/HARD_sample_coins.bmp"));
         int height = img.getHeight();
         int width = img.getWidth();
         //System.out.println(height + " " + width + " " + img.getRGB(10,10));
@@ -37,7 +37,7 @@ public class BitmapConverter {
                     newImg.setRGB(w, h, rgb);
                 }
             }
-            File out = new File("oral_exam2/S26_CannyEdgeDetector/output.bmp");
+            File out = new File("oral_exam2/S26_CannyEdgeDetector_Easy/output.bmp");
             ImageIO.write(newImg, "bmp", out);
         }
         catch (Exception e) {

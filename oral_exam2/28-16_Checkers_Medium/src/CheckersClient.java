@@ -154,6 +154,7 @@ public class CheckersClient extends JFrame implements Runnable {
             else if (currentSquare.getSquareLocation() == lastSquare.getSquareLocation() - 18) {
                 setMark(board[(lastSquare.getSquareLocation() - 9) / 8][(lastSquare.getSquareLocation() - 9) % 8], " ");
             }
+            myTurn = true;
         } else if (message.equals("Invalid move, try again")) {
             displayMessage(message + "\n"); // display invalid move
             myTurn = true; // still this client's turn
@@ -184,7 +185,21 @@ public class CheckersClient extends JFrame implements Runnable {
             System.out.println("cap: " + board[capRow][capColumn].getMark());
 
             displayMessage("Opponent captured. Your turn.\n");
-            myTurn = true; // now this client's turn
+
+            if (myMark.equals(R_MARK) && ((board[(newLocation + 7) / 8][(newLocation + 7) % 8].getMark().equals(B_MARK) && board[(newLocation + 14) / 8][(newLocation + 14) % 8].getMark().equals(" "))
+                    || (board[(newLocation + 9) / 8][(newLocation + 9) % 8].getMark().equals(B_MARK) && board[(newLocation + 18) / 8][(newLocation + 18) % 8].getMark().equals(" ")))) {
+                myTurn = true;
+            }
+            else if(myMark.equals(B_MARK) && ((board[(newLocation - 7) / 8][(newLocation - 7) % 8].getMark().equals(B_MARK) && board[(newLocation - 14) / 8][(newLocation - 14) % 8].getMark().equals(" "))
+                    || (board[(newLocation - 9) / 8][(newLocation - 9) % 8].getMark().equals(B_MARK) && board[(newLocation - 18) / 8][(newLocation - 18) % 8].getMark().equals(" ")))) {
+                myTurn = true;
+            }
+            else {
+                myTurn = false;
+            }
+
+            // myTurn = true; // now this client's turn
+            //myTurn = false;
         } else if (message.equals("Opponent moved")) {
             int newLocation = input.nextInt(); // get move location
             input.nextLine(); // skip newline after int location

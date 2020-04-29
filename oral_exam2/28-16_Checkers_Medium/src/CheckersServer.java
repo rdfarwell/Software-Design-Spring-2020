@@ -162,16 +162,24 @@ public class CheckersServer extends JFrame {
                     }
                 }
 
-                currentPlayer = (currentPlayer + 1) % 2;
+                if (currentPlayer == 0 && (!isOccupied(newLocation+14) || !isOccupied(newLocation+18))) {
+                    players[(currentPlayer + 1) % 2].otherPlayerCaptured(newLocation, oldLocation, capturedLocation);
+                }
+                else if(currentPlayer == 1 && (!isOccupied(newLocation-14) || !isOccupied(newLocation-18))) {
+                    players[(currentPlayer + 1) % 2].otherPlayerCaptured(newLocation, oldLocation, capturedLocation);
+                }
+                else {
+                    currentPlayer = (currentPlayer + 1) % 2;
 
-                players[currentPlayer].otherPlayerCaptured(newLocation, oldLocation, capturedLocation);
+                    players[currentPlayer].otherPlayerCaptured(newLocation, oldLocation, capturedLocation);
 
-                gameLock.lock(); // lock game to signal other player to go
+                    gameLock.lock(); // lock game to signal other player to go
 
-                try {
-                    otherPlayerTurn.signal(); // signal other player to continue
-                } finally {
-                    gameLock.unlock(); // unlock game after signaling
+                    try {
+                        otherPlayerTurn.signal(); // signal other player to continue
+                    } finally {
+                        gameLock.unlock(); // unlock game after signaling
+                    }
                 }
             }
             else {
