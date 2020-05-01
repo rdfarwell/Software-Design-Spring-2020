@@ -46,7 +46,7 @@ public class CheckersClient extends JFrame implements Runnable {
                     markArray[i] = "R";
                 }
                 else if ((i > 39 && i < 48) || i > 55) {
-                    markArray[i] = "B";
+                        markArray[i] = "B";
                 }
                 else {
                     markArray[i] = " ";
@@ -60,7 +60,12 @@ public class CheckersClient extends JFrame implements Runnable {
                     markArray[i] = "B";
                 }
                 else {
-                    markArray[i] = " ";
+                    if (i == 56) {
+                        markArray[i] = "E";
+                    }
+                    else {
+                        markArray[i] = " ";
+                    }
                 }
             }
         }
@@ -133,8 +138,10 @@ public class CheckersClient extends JFrame implements Runnable {
 
     // process messages received by client
     private void processMessage(String message) {
-        // valid move occurred
-        if (message.equals("Valid move.")) {
+        if (message.equals("Ended")) {
+            displayMessage("Other Player has ended the game.\n");
+        }
+        else if (message.equals("Valid move.")) {
             displayMessage("Valid move, please wait.\n");
             setMark(currentSquare, myMark); // set mark in square
             setMark(lastSquare, " ");

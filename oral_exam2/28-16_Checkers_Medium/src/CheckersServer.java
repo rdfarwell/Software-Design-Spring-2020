@@ -25,6 +25,7 @@ public class CheckersServer extends JFrame {
     private Condition otherPlayerConnected; // to wait for other player
     private Condition otherPlayerTurn; // to wait for other player's turn
     private boolean capture;
+    private boolean gameOver;
 
     // set up tic-tac-toe server and GUI that displays messages
     public CheckersServer() {
@@ -256,7 +257,7 @@ public class CheckersServer extends JFrame {
     public boolean capture(int oldLocation, int newLocation, int curPlayer) {
         boolean capture = false;
 
-        if (curPlayer == 0) { //R
+        if (curPlayer == 0) { // R
             capture = ((newLocation == (oldLocation + 14)) && (board[oldLocation + 7].equals("B"))) || ((newLocation == (oldLocation + 18)) && board[oldLocation + 9].equals("B"));
         }
         else if (curPlayer == 1) { // B
@@ -270,7 +271,7 @@ public class CheckersServer extends JFrame {
 
     // place code in this method to determine whether game over
     public boolean isGameOver() {
-        return false; // this is left as an exercise
+        return gameOver; // this is left as an exercise
     }
 
     // private inner class Player manages each Player as a runnable
@@ -369,7 +370,13 @@ public class CheckersServer extends JFrame {
                         }
                     }
 
-                    if (board[location].equals(MARKS[currentPlayer]) && !isOccupied(location2)) {
+                    if (location == 56) {
+                        displayMessage("Player " + MARKS[currentPlayer] + " has ended the game");
+                        gameOver = true;
+                        output.format("Ended");
+                        output.flush();
+                    }
+                    else if (board[location].equals(MARKS[currentPlayer]) && !isOccupied(location2)) {
                         if (validateAndMove(location, location2, playerNumber)) {
                             if (capture) { // (location, location2, (currentPlayer + 1) % 2) TODO
                                 displayMessage("\nFrom location: " + location);
