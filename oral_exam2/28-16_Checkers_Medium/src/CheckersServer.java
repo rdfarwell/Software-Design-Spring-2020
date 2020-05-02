@@ -315,6 +315,11 @@ public class CheckersServer extends JFrame {
             output.flush(); // flush output
         }
 
+        public void otherPlayerEnded() {
+            output.format("Opponent ended");
+            output.flush();
+        }
+
         // control thread's execution
         public void run() {
             // send client its mark (X or O), process messages from client
@@ -371,8 +376,9 @@ public class CheckersServer extends JFrame {
                     }
 
                     if (location == 56) {
-                        displayMessage("Player " + MARKS[currentPlayer] + " has ended the game");
+                        displayMessage("\nPlayer " + MARKS[currentPlayer] + " has ended the game");
                         gameOver = true;
+                        players[(currentPlayer + 1) % 2].otherPlayerEnded();
                         output.format("Ended");
                         output.flush();
                     }

@@ -138,8 +138,11 @@ public class CheckersClient extends JFrame implements Runnable {
 
     // process messages received by client
     private void processMessage(String message) {
-        if (message.equals("Ended")) {
+        if (message.equals("Opponent ended")) {
             displayMessage("Other Player has ended the game.\n");
+        }
+        else if (message.equals("Ended")) {
+            displayMessage("You ended the game.\n");
         }
         else if (message.equals("Valid move.")) {
             displayMessage("Valid move, please wait.\n");
