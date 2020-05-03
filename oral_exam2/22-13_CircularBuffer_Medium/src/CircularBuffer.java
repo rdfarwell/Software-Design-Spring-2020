@@ -2,25 +2,58 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-// Fig. 23.18: CircularBuffer.java
-// Synchronizing access to a shared three-element bounded buffer.
+/**
+ * Synchronizing access to a shared three-element bounded buffer. Edited to use locks and conditions
+ * @author In-Text Example
+ * @author Dean Farwell
+ */
 public class CircularBuffer implements Buffer {
-    private final int[] buffer = {-1, -1, -1}; // shared buffer
 
-    private int occupiedCells = 0; // count number of buffers used
-    private int writeIndex = 0; // index of next element to write to
-    private int readIndex = 0; // index of next element to read
+    /**
+     * Shared buffer
+     */
+    private final int[] buffer = {-1, -1, -1};
 
+    /**
+     * Count number of buffers used
+     */
+    private int occupiedCells = 0;
+
+    /**
+     * Index of next element to write to
+     */
+    private int writeIndex = 0;
+
+    /**
+     * Index of next element to read
+     */
+    private int readIndex = 0;
+
+    /**
+     * Lock to restrain access of the Consumer and Producer classes using locks and conditions
+     */
     private final Lock accessLock = new ReentrantLock();
+
+    /**
+     * Condition to let the buffer know there is a cell free
+     */
     private final Condition canWrite = accessLock.newCondition();
+
+    /**
+     * Condition to let the buffer know there is a cell to read
+     */
     private final Condition canRead = accessLock.newCondition();
 
-    // place value into buffer
+    /**
+     * Places values into buffer.
+     * @param value Value to be placed into the buffer
+     * @throws InterruptedException Thrown if there is a thread issue
+     */
     public void blockingPut(int value) throws InterruptedException {
         accessLock.lock(); // lock this object
 
         try {
-            // wait until buffer has space avaialble, then write value;
+            // wait until buffer has space available, then write value;
             // while no empty locations, place thread in waiting state
             while (occupiedCells == buffer.length) {
                 System.out.println("Producer tries to write.");
@@ -41,7 +74,11 @@ public class CircularBuffer implements Buffer {
         }
     }
 
-    // return value from buffer
+    /**
+     * Returns value from buffer.
+     * @return Value that was contained within the buffer
+     * @throws InterruptedException Thrown if there is a thread issue
+     */
     public int blockingGet() throws InterruptedException {
         int readValue = 0; // value read from buffer
         accessLock.lock(); // lock this object
@@ -69,7 +106,10 @@ public class CircularBuffer implements Buffer {
         return readValue;
     }
 
-    // display current operation and buffer state
+    /**
+     * Display current operation and buffer state.
+     * @param operation Operation to be performed
+     */
     public void displayState(String operation) {
         try {
             accessLock.lock();
@@ -103,10 +143,9 @@ public class CircularBuffer implements Buffer {
             accessLock.unlock();
         }
     }
-} // end class CircularBuffer
+}
 
-
-/**************************************************************************
+/* ************************************************************************
  * (C) Copyright 1992-2015 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *

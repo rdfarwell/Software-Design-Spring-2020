@@ -1,18 +1,32 @@
-// Fig. 23.10: Producer.java
-// Producer with a run method that inserts the values 1 to 10 in buffer.
-
 import java.security.SecureRandom;
 
+/**
+ * Producer with a run method that inserts the values 1 to 10 in buffer.
+ * @author In-Text Example
+ */
 public class Producer implements Runnable {
-    private static final SecureRandom generator = new SecureRandom();
-    private final Buffer sharedLocation; // reference to shared object
 
-    // constructor
+    /**
+     * Random number generator for sleep time of the thread.
+     */
+    private static final SecureRandom generator = new SecureRandom();
+
+    /**
+     * Buffer reference to shared object
+     */
+    private final Buffer sharedLocation;
+
+    /**
+     * Constructor for the Producer object
+     * @param sharedLocation
+     */
     public Producer(Buffer sharedLocation) {
         this.sharedLocation = sharedLocation;
     }
 
-    // store values from 1 to 10 in sharedLocation
+    /**
+     * Stores values from 1 to 10 in sharedLocation
+     */
     public void run() {
         int sum = 0;
 
@@ -26,14 +40,11 @@ public class Producer implements Runnable {
                 Thread.currentThread().interrupt();
             }
         }
-
-        System.out.printf(
-                "Producer done producing%nTerminating Producer%n");
+        System.out.printf("Producer done producing%nTerminating Producer%n");
     }
-} // end class Producer
+}
 
-
-/**************************************************************************
+/* ************************************************************************
  * (C) Copyright 1992-2015 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *

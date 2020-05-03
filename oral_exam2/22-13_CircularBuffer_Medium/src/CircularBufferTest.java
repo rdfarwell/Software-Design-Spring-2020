@@ -1,11 +1,18 @@
-// Fig 23.19: CircularBufferTest.java
-// Producer and Consumer threads correctly manipulating a circular buffer.
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Producer and Consumer threads correctly manipulating a circular buffer.
+ * @author In-Text Example
+ */
 public class CircularBufferTest {
+
+    /**
+     * Main method that shows Producer and Consumer threads correctly manipulating a circular buffer.
+     * @param args String array of arguments that is required for the main method in Java
+     * @throws InterruptedException Thrown if the thread has any timeout issues
+     */
     public static void main(String[] args) throws InterruptedException {
         // create new thread pool with two threads
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -26,7 +33,7 @@ public class CircularBufferTest {
 } // end class CircularBufferTest
 
 
-/**************************************************************************
+/* ************************************************************************
  * (C) Copyright 1992-2015 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *

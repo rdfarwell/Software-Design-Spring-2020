@@ -1,18 +1,32 @@
-// Fig. 23.11: Consumer.java
-// Consumer with a run method that loops, reading 10 values from buffer.
-
 import java.security.SecureRandom;
 
+/**
+ * Consumer with a run method that loops, reading 10 values from buffer.
+ * @author In-Text Example
+ */
 public class Consumer implements Runnable {
-    private static final SecureRandom generator = new SecureRandom();
-    private final Buffer sharedLocation; // reference to shared object
 
-    // constructor
+    /**
+     * Random number generator that creates the sleep time of each thread
+     */
+    private static final SecureRandom generator = new SecureRandom();
+
+    /**
+     * Buffer reference to shared object
+     */
+    private final Buffer sharedLocation;
+
+    /**
+     * Constructor for the consumer object
+     * @param sharedLocation Buffer reference to a shared object
+     */
     public Consumer(Buffer sharedLocation) {
         this.sharedLocation = sharedLocation;
     }
 
-    // read sharedLocation's value 10 times and sum the values
+    /**
+     * Reads sharedLocation's value 10 times and sums the values
+     */
     public void run() {
         int sum = 0;
 
@@ -25,14 +39,11 @@ public class Consumer implements Runnable {
                 Thread.currentThread().interrupt();
             }
         }
-
-        System.out.printf("%n%s %d%n%s%n",
-                "Consumer read values totaling", sum, "Terminating Consumer");
+        System.out.printf("%n%s %d%n%s%n", "Consumer read values totaling", sum, "Terminating Consumer");
     }
-} // end class Consumer
+}
 
-
-/**************************************************************************
+/* ************************************************************************
  * (C) Copyright 1992-2015 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *

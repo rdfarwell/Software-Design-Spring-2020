@@ -1,5 +1,7 @@
-// Fig. 23.9: Buffer.java
-// Buffer interface specifies methods called by Producer and Consumer.
+/**
+ * Buffer interface specifies methods called by Producer and Consumer.
+ * @author In-Text Example
+ */
 public interface Buffer {
     // place int value into Buffer
     public void blockingPut(int value) throws InterruptedException;
@@ -8,8 +10,7 @@ public interface Buffer {
     public int blockingGet() throws InterruptedException;
 } // end interface Buffer
 
-
-/**************************************************************************
+/* ************************************************************************
  * (C) Copyright 1992-2015 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
