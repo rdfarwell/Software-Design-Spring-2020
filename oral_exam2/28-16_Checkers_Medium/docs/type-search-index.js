@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"CheckersClient"},{"p":"<Unnamed>","l":"CheckersClientTest"},{"p":"<Unnamed>","l":"CheckersServer"},{"p":"<Unnamed>","l":"CheckersServerTest"},{"p":"<Unnamed>","l":"CheckersServer.Player"},{"p":"<Unnamed>","l":"CheckersClient.Square"}]
