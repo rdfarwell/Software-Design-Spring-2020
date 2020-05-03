@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"BitmapConverter"},{"p":"<Unnamed>","l":"CannyEdgeDetectorMain"},{"p":"<Unnamed>","l":"ImageProcessor"}]
