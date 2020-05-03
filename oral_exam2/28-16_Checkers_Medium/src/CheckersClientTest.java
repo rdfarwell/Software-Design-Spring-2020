@@ -1,6 +1,15 @@
 import javax.swing.*;
 
+/**
+ * Main class of checkers client
+ * @author Dean Farwell
+ */
 public class CheckersClientTest {
+
+    /**
+     * Main method that creates the GUI and client object
+     * @param args Required string of arguments from Java
+     */
     public static void main(String[] args) {
         CheckersClient application; // declare client application
 

@@ -1,9 +1,15 @@
-// Fig. 28.12: TicTacToeServerTest.java
-// Class that tests Tic-Tac-Toe server.
-
 import javax.swing.*;
 
+/**
+ * Creates the server GUI and object
+ * @author Dean Farwell
+ */
 public class CheckersServerTest {
+
+    /**
+     * Main method that creates the server
+     * @param args String array of arguments required by Java
+     */
     public static void main(String[] args) {
         CheckersServer application = new CheckersServer();
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

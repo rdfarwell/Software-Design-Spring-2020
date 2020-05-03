@@ -11,23 +11,85 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Class that creates the Checkers Server
+ * @author Dean Farwell
+ */
 public class CheckersServer extends JFrame {
+
+    /**
+     * Red Player
+     */
     private final static int PLAYER_R = 0; // constant for first player
+
+    /**
+     * Black Player
+     */
     private final static int PLAYER_B = 1; // constant for second player
+
+    /**
+     * Marks for either player
+     */
     private final static String[] MARKS = {"R", "B"}; // array of marks
+
+    /**
+     * Board array to hold each mark for display
+     */
     private String[] board = new String[64]; // tic-tac-toe board
+
+    /**
+     * Output area for displaying information
+     */
     private JTextArea outputArea; // for outputting moves
+
+    /**
+     * Array of players in the game (2)
+     */
     private Player[] players; // array of Players
+
+    /**
+     * Server socket to connect with clients
+     */
     private ServerSocket server; // server socket to connect with clients
+
+    /**
+     * Keeps track of player with current move
+     */
     private int currentPlayer; // keeps track of player with current move
+
+    /**
+     * Will run players
+     */
     private ExecutorService runGame; // will run players
+
+    /**
+     * To lock game for synchronization
+     */
     private Lock gameLock; // to lock game for synchronization
+
+    /**
+     * To wait for other player
+     */
     private Condition otherPlayerConnected; // to wait for other player
+
+    /**
+     * To wait for other player's turn
+     */
     private Condition otherPlayerTurn; // to wait for other player's turn
+
+    /**
+     * Boolean for if there is another capture possible
+     */
     private boolean capture;
+
+    /**
+     * Boolean for if the game is over
+     */
     private boolean gameOver;
 
-    // set up tic-tac-toe server and GUI that displays messages
+    /**
+     * Set up checkers server and GUI that displays messages
+     */
     public CheckersServer() {
         super("Checkers Server"); // set title of window
 
@@ -83,7 +145,9 @@ public class CheckersServer extends JFrame {
         setVisible(true); // show window
     }
 
-    // wait for two connections so game can be played
+    /**
+     * Waits for two connections so game can be played
+     */
     public void execute() {
         // wait for each client to connect
         for (int i = 0; i < players.length; i++) {
@@ -108,7 +172,10 @@ public class CheckersServer extends JFrame {
         }
     }
 
-    // display message in outputArea
+    /**
+     * Display message in outputArea
+     * @param messageToDisplay Message to display
+     */
     private void displayMessage(final String messageToDisplay) {
         // display message from event-dispatch thread of execution
         SwingUtilities.invokeLater(
@@ -121,7 +188,13 @@ public class CheckersServer extends JFrame {
         );
     }
 
-    // determine if move is valid
+    /**
+     * Determine if move is valid
+     * @param oldLocation Old Location of the piece
+     * @param newLocation Location piece is trying to move to
+     * @param player Player moving
+     * @return If the move was valid (boolean)
+     */
     public boolean validateAndMove(int oldLocation, int newLocation, int player) {
         // while not current player, must wait for turn
         while (player != currentPlayer) {
@@ -206,7 +279,11 @@ public class CheckersServer extends JFrame {
             return false; // notify player that move was invalid
     }
 
-    // determine whether location is occupied
+    /**
+     * Determine whether location is occupied
+     * @param location Location that is being checked
+     * @return Boolean if the space is occupied or not
+     */
     public boolean isOccupied(int location) {
         if (board[location].equals(MARKS[PLAYER_R]) || board[location].equals(MARKS[PLAYER_B])) {
             return true; // location is occupied
@@ -216,8 +293,15 @@ public class CheckersServer extends JFrame {
         }
     }
 
+    /**
+     * Checks if the attempted move is a valid checker move
+     * @param oldLocation Location piece is moving from
+     * @param newLocation Location piece is trying to move to
+     * @return Boolean whether move is valid
+     */
     public boolean validCheckerMove(int oldLocation, int newLocation) {
         boolean validSpace;
+
         if ((newLocation % 2 == 1) && ((newLocation > 7 && newLocation < 16) || (newLocation > 23 && newLocation < 32) || (newLocation > 39 && newLocation < 48) || newLocation > 55)) { // odd spaces
             validSpace = true;
         }
@@ -254,6 +338,13 @@ public class CheckersServer extends JFrame {
         return (validSpace || capture);
     }
 
+    /**
+     * Checks if there is another capture possible
+     * @param oldLocation Location piece is moving from
+     * @param newLocation Location piece is moving to
+     * @param curPlayer Current player making the move
+     * @return Boolean of whether there is another capture possible
+     */
     public boolean capture(int oldLocation, int newLocation, int curPlayer) {
         boolean capture = false;
 
@@ -269,21 +360,54 @@ public class CheckersServer extends JFrame {
         return capture;
     }
 
-    // place code in this method to determine whether game over
+    /**
+     * Getter for the gameOver boolean that is updated throughout the code
+     * @return whether or not the game is over
+     */
     public boolean isGameOver() {
-        return gameOver; // this is left as an exercise
+        return gameOver; // updated throughout the code
     }
 
-    // private inner class Player manages each Player as a runnable
+    /**
+     * Manages each Player as a runnable
+     */
     private class Player implements Runnable {
+
+        /**
+         * Connection to client
+         */
         private Socket connection; // connection to client
+
+        /**
+         * Input from client
+         */
         private Scanner input; // input from client
+
+        /**
+         * output to client
+         */
         private Formatter output; // output to client
+
+        /**
+         * Tracks which player this is
+         */
         private int playerNumber; // tracks which player this is
+
+        /**
+         * Mark for this player
+         */
         private String mark; // mark for this player
+
+        /**
+         * Whether thread is suspended
+         */
         private boolean suspended = true; // whether thread is suspended
 
-        // set up Player thread
+        /**
+         * Set up Player thread
+         * @param socket Connection of the client
+         * @param number Number of the player
+         */
         public Player(Socket socket, int number) {
             playerNumber = number; // store this player's number
             mark = MARKS[playerNumber]; // specify player's mark
@@ -299,7 +423,11 @@ public class CheckersServer extends JFrame {
             }
         }
 
-        // send message that other player moved
+        /**
+         * Send message that other player moved
+         * @param newLocation New location of the piece
+         * @param oldLocation Old location of the piece
+         */
         public void otherPlayerMoved(int newLocation, int oldLocation) {
             output.format("Opponent moved\n");
             output.format("%d\n", newLocation); // send location of move
@@ -307,6 +435,12 @@ public class CheckersServer extends JFrame {
             output.flush(); // flush output
         }
 
+        /**
+         * Send message that other player captured
+         * @param newLocation New location of the piece
+         * @param oldLocation Old location of the piece
+         * @param capturedLocation Location of capture piece
+         */
         public void otherPlayerCaptured(int newLocation, int oldLocation, int capturedLocation) {
             output.format("Opponent captured\n");
             output.format("%d\n", newLocation); // send location of move
@@ -315,12 +449,17 @@ public class CheckersServer extends JFrame {
             output.flush(); // flush output
         }
 
+        /**
+         * Tell other player that their opponent has ended the match
+         */
         public void otherPlayerEnded() {
             output.format("Opponent ended");
             output.flush();
         }
 
-        // control thread's execution
+        /**
+         * Controls thread's execution and the match
+         */
         public void run() {
             // send client its mark (X or O), process messages from client
             try {
@@ -419,7 +558,10 @@ public class CheckersServer extends JFrame {
             }
         }
 
-        // set whether or not thread is suspended
+        /**
+         * Set whether or not thread is suspended
+         * @param status Status of the thread
+         */
         public void setSuspended(boolean status) {
             suspended = status; // set value of suspended
         }

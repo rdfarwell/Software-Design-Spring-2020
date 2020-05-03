@@ -10,27 +10,97 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Main class of the client side for checkers
+ */
 public class CheckersClient extends JFrame implements Runnable {
+
+    /**
+     * Mark for first client
+     */
     private final String R_MARK = "R"; // mark for first client
+
+    /**
+     * Mark for second client
+     */
     private final String B_MARK = "B"; // mark for second client
+
+    /**
+     * Textfield to display player's mark
+     */
     private JTextField idField; // textfield to display player's mark
+
+    /**
+     * TTextArea to display output
+     */
     private JTextArea displayArea; // JTextArea to display output
-    private JPanel boardPanel; // panel for tic-tac-toe board
+
+    /**
+     * Panel for checker board
+     */
+    private JPanel boardPanel; // panel for checker board
+
+    /**
+     * Panel to hold board
+     */
     private JPanel panel2; // panel to hold board
-    private Square[][] board; // tic-tac-toe board
+
+    /**
+     * Checker board
+     */
+    private Square[][] board; // checker board
+
+    /**
+     * Current square
+     */
     private Square currentSquare; // current square
+
+    /**
+     * Last square clicked
+     */
     private Square lastSquare;
+
+    /**
+     * Connection to server
+     */
     private Socket connection; // connection to server
+
+    /**
+     * Input from server
+     */
     private Scanner input; // input from server
+
+    /**
+     * Output to server
+     */
     private Formatter output; // output to server
-    private String ticTacToeHost; // host name for server
+
+    /**
+     * Host name for server
+     */
+    private String checkerHost; // host name for server
+
+    /**
+     * This client's mark
+     */
     private String myMark; // this client's mark
+
+    /**
+     * Determines which client's turn it is
+     */
     private boolean myTurn; // determines which client's turn it is
+
+    /**
+     * Mark array for what to draw on the board
+     */
     private String[] markArray = new String[64];
 
-    // set up user-interface and board
+    /**
+     * Set up user-interface and board
+     * @param host Name of the server
+     */
     public CheckersClient(String host) {
-        ticTacToeHost = host; // set name of server
+        checkerHost = host; // set name of server
         displayArea = new JTextArea(4, 30); // set up JTextArea
         displayArea.setEditable(false);
         add(new JScrollPane(displayArea), BorderLayout.SOUTH);
@@ -94,13 +164,15 @@ public class CheckersClient extends JFrame implements Runnable {
         startClient();
     }
 
-    // start the client thread
+    /**
+     * Start the client thread
+     */
     public void startClient() {
         try // connect to server and get streams
         {
             // make connection to server
             connection = new Socket(
-                    InetAddress.getByName(ticTacToeHost), 12345);
+                    InetAddress.getByName(checkerHost), 12345);
 
             // get streams for input and output
             input = new Scanner(connection.getInputStream());
@@ -114,7 +186,9 @@ public class CheckersClient extends JFrame implements Runnable {
         worker.execute(this); // execute client
     }
 
-    // control thread that allows continuous update of displayArea
+    /**
+     * Control thread that allows continuous update of displayArea
+     */
     public void run() {
         myMark = input.nextLine(); // get player's mark (X or O)
 
@@ -136,7 +210,10 @@ public class CheckersClient extends JFrame implements Runnable {
         }
     }
 
-    // process messages received by client
+    /**
+     * Process messages received by client
+     * @param message Message to be interpreted from the server
+     */
     private void processMessage(String message) {
         if (message.equals("Opponent ended")) {
             displayMessage("Other Player has ended the game.\n");
@@ -233,7 +310,10 @@ public class CheckersClient extends JFrame implements Runnable {
             displayMessage(message + "\n"); // display the message
     }
 
-    // manipulate displayArea in event-dispatch thread
+    /**
+     * Manipulate displayArea in event-dispatch thread
+     * @param messageToDisplay Message to be displayed
+     */
     private void displayMessage(final String messageToDisplay) {
         SwingUtilities.invokeLater(
                 new Runnable() {
@@ -244,7 +324,11 @@ public class CheckersClient extends JFrame implements Runnable {
         );
     }
 
-    // utility method to set mark on board in event-dispatch thread
+    /**
+     * Utility method to set mark on board in event-dispatch thread
+     * @param squareToMark Square to be updated
+     * @param mark Mark to be added to square
+     */
     private void setMark(final Square squareToMark, final String mark) { //
         SwingUtilities.invokeLater(
                 new Runnable() {
@@ -255,7 +339,10 @@ public class CheckersClient extends JFrame implements Runnable {
         );
     }
 
-    // send message to server indicating clicked square
+    /**
+     * Send message to server indicating clicked square
+     * @param location location of clicked square
+     */
     public void sendClickedSquare(int location) {
         // if it is my turn
         if (myTurn) {
@@ -265,20 +352,42 @@ public class CheckersClient extends JFrame implements Runnable {
         }
     }
 
-    // set current Square
+    /**
+     * Set current Square
+     * @param square square that has been clicked
+     */
     public void setCurrentSquare(Square square) {
         currentSquare = square; // set current square to argument
     }
 
+    /**
+     * Set last square
+     * @param square Last square that was clicked
+     */
     public void setLastSquare(Square square) {
         lastSquare = square;
     }
 
-    // private inner class for the squares on the board
+    /**
+     * Private inner class for the squares on the board
+     */
     private class Square extends JPanel {
+
+        /**
+         * Mark to be drawn in this square
+         */
         private String mark; // mark to be drawn in this square
+
+        /**
+         * Location of square
+         */
         private int location; // location of square
 
+        /**
+         * Constructor of the square
+         * @param squareMark Mark to be set for square
+         * @param squareLocation Location of the square
+         */
         public Square(String squareMark, int squareLocation) {
             mark = squareMark; // set mark for this square
             location = squareLocation; // set location of this square
@@ -296,50 +405,66 @@ public class CheckersClient extends JFrame implements Runnable {
             );
         }
 
-        // return preferred size of Square
+        /**
+         * Return preferred size of Square
+         * @return Size of the square
+         */
         public Dimension getPreferredSize() {
             return new Dimension(30, 30); // return preferred size
         }
 
-        // return minimum size of Square
+        /**
+         * Return minimum size of Square
+         * @return Preferred size of the square
+         */
         public Dimension getMinimumSize() {
             return getPreferredSize(); // return preferred size
         }
 
-        // set mark for Square
+        /**
+         * Set mark for Square
+         * @param newMark Mark to be set to square
+         */
         public void setMark(String newMark) {
             mark = newMark; // set mark of square
             repaint(); // repaint square
         }
 
+        /**
+         * Gets the square's mark
+         * @return The square's mark
+         */
         public String getMark() {
             return mark;
         }
 
-        // return Square location
+        /**
+         * Return Square location
+         * @return location of the square
+         */
         public int getSquareLocation() {
             return location; // return location of square
         }
 
-        // draw Square
+        /**
+         * Draws the Square
+         * @param g Graphics element for creating the drawings
+         */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
             g.drawRect(0, 0, 29, 29); // draw square
-            if (mark.equals("R")) {
+            if (mark.equals("R")) { // draw red checker
                 g.setColor(Color.red);
                 g.fillOval(5, 5, 20, 20);
             }
-            else if (mark.equals("B")) {
+            else if (mark.equals("B")) { // draw black checker
                 g.setColor(Color.black);
                 g.fillOval(5, 5, 20, 20);
             }
-            else {
+            else { // draw empty
                 g.drawString(mark, 11, 20);
-//                g.setColor(Color.white);
-//                g.fillOval(5, 5, 20, 20);
             }
-            //g.drawString(mark, 11, 20); // draw mark
         }
     }
 }
