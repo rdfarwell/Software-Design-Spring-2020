@@ -131,7 +131,7 @@ public class CheckersServer extends JFrame {
         currentPlayer = PLAYER_R; // set current player to first player
 
         try {
-            server = new ServerSocket(23558, 2); // set up ServerSocket
+            server = new ServerSocket(12345, 2); // set up ServerSocket // port 23558 causes error
         } catch (IOException ioException) {
             ioException.printStackTrace();
             System.exit(1);

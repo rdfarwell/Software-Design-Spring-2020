@@ -15,7 +15,7 @@ public class BitmapConverter {
      * @throws Exception Thrown if there is an error opening the file
      */
     public static int[][] bitmapConverter() throws Exception{
-        BufferedImage img = ImageIO.read(new File("oral_exam2/S26_CannyEdgeDetector_Easy/HARD_sample_coins.bmp"));
+        BufferedImage img = ImageIO.read(new File("oral_exam2/S26_CannyEdgeDetector_Easy/SampleSquareImage.bmp"));
         int height = img.getHeight();
         int width = img.getWidth();
         int[][] imageArray = new int[height][width];
