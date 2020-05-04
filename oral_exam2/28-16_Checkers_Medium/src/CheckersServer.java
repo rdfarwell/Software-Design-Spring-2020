@@ -453,7 +453,7 @@ public class CheckersServer extends JFrame {
          * Tell other player that their opponent has ended the match
          */
         public void otherPlayerEnded() {
-            output.format("Opponent ended");
+            output.format("Opponent ended\n");
             output.flush();
         }
 
@@ -514,7 +514,7 @@ public class CheckersServer extends JFrame {
                         }
                     }
 
-                    if (location == 56) {
+                    if (location == 56 && location2 == 56) {
                         displayMessage("\nPlayer " + MARKS[currentPlayer] + " has ended the game");
                         gameOver = true;
                         players[(currentPlayer + 1) % 2].otherPlayerEnded();
